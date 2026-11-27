@@ -218,7 +218,7 @@ def main():
     parser.add_argument(
         "--doc",
         action="store_true",
-        help="Run 100% C89 + COBOL documentation coverage audit",
+        help="Run 100%% C89 + COBOL documentation coverage audit",
     )
     parser.add_argument("--root", default=".", help="Repository root directory")
     parser.add_argument(

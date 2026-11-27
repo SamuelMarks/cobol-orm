@@ -17,7 +17,7 @@
 - [Key Capabilities](#key-capabilities)
 - [Multi-Era COBOL Compatibility Matrix](#multi-era-cobol-compatibility-matrix)
 - [Quickstart](#quickstart)
-  - [Build & Run All 25 Verification Tests](#build--run-all-25-verification-tests)
+  - [Build & Run All 34 Verification Tests](#build--run-all-34-verification-tests)
   - [Free-Format COBOL-2014/2023 Example](#free-format-cobol-20142023-example)
   - [Strict Fixed-80 IBM Enterprise COBOL Example](#strict-fixed-80-ibm-enterprise-cobol-example)
   - [Historical COBOL-60..COBOL-85 Example](#historical-cobol-60cobol-85-example)
@@ -69,7 +69,7 @@
 
 ## Quickstart
 
-### Build & Run All 25 Verification Tests
+### Build & Run All 34 Verification Tests
 
 ```sh
 cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
@@ -186,7 +186,7 @@ END PROGRAM HELLO-CORM.
 | :--- | :--- | :--- |
 | `BUILD_SHARED_LIBS` | `OFF` | Build `cobol_orm_c` as a shared library (`cobol_orm_ffi` is always shared for `cobc` / `COB_PRE_LOAD`) |
 | `COBOL_ORM_BUILD_TESTS` | `ON` | Build and register C89, ABI layout, 10-era COBOL, E2E free/fixed, and IBM/MF syntax tests in CTest |
-| `COBOL_ORM_BUILD_EXAMPLES` | `ON` | Build and register all 8 free & fixed runnable COBOL examples in CTest |
+| `COBOL_ORM_BUILD_EXAMPLES` | `ON` | Build and register all 17 free & fixed runnable COBOL examples in CTest |
 | `COBOL_ORM_BUILD_FREE` | `ON` | Build free-format COBOL library, tests, and examples |
 | `COBOL_ORM_BUILD_FIXED` | `ON` | Build strict fixed 80-column COBOL library, tests, examples, and IBM/MF dialect checks |
 | `COBOL_ORM_ENABLE_COVERAGE` | `OFF` | Instrument `cobol_orm_c` and `test_cobol_orm_c` with `--coverage -O0 -g` (deps excluded) |
@@ -200,7 +200,7 @@ END PROGRAM HELLO-CORM.
 
 ## Runnable Examples
 
-All examples exist in **both** free-format (`examples/free/`) and strict fixed 80-column format (`examples/fixed/`) and are built and verified in CTest:
+All modern examples exist in **both** free-format (`examples/free/`) and strict fixed 80-column format (`examples/fixed/`, verified under `-std=ibm-strict` and `-std=mf-strict`), plus a dedicated COBOL-60..85 pure `USAGE DISPLAY` COMMAREA batch example — all 17 examples are built and verified in CTest:
 
 | Example | Free-Format | Fixed 80-Column | Demonstrates |
 | :--- | :--- | :--- | :--- |
@@ -208,6 +208,11 @@ All examples exist in **both** free-format (`examples/free/`) and strict fixed 8
 | Banking Ledger | [`examples/free/banking_ledger.cbl`](examples/free/banking_ledger.cbl) | [`examples/fixed/banking_ledger.cbl`](examples/fixed/banking_ledger.cbl) | Transactions, savepoints, rollback-to-savepoint, 38-digit decimal math, `IBM037` EBCDIC |
 | Query Builder | [`examples/free/query_builder_demo.cbl`](examples/free/query_builder_demo.cbl) | [`examples/fixed/query_builder_demo.cbl`](examples/fixed/query_builder_demo.cbl) | Arena-backed fluent AST with Db2 `WITH UR` isolation lock and multi-dialect SQL rendering |
 | Migrations & Pool | [`examples/free/migrations_and_pool.cbl`](examples/free/migrations_and_pool.cbl) | [`examples/fixed/migrations_and_pool.cbl`](examples/fixed/migrations_and_pool.cbl) (`-std=ibm-strict`) | Connection pool init/acquire/telemetry/release/destroy, stmt cache, and versioned `UP`/`DOWN` SQL migrations |
+| Prepared Statements | [`examples/free/prepared_statements.cbl`](examples/free/prepared_statements.cbl) | [`examples/fixed/prepared_statements.cbl`](examples/fixed/prepared_statements.cbl) (`-std=ibm-strict`) | LRU-cached prepared statements, typed binds (`INT32`, `PIC X`, direct `COMP-3`, `NULL`), `reset`/reuse, `last_insert_rowid`, and direct `COMP-3` cursor reads |
+| Abstract Result Set | [`examples/free/abstract_result_set.cbl`](examples/free/abstract_result_set.cbl) | [`examples/fixed/abstract_result_set.cbl`](examples/fixed/abstract_result_set.cbl) (`-std=ibm-strict`) | Live fluent AST `INSERT`/`UPDATE` execution (`ast_exec`) + schema-less `query_abstract` row/column metadata, variant types, and named getters |
+| Copybook Batch & DCLGEN | [`examples/free/copybook_batch_validation.cbl`](examples/free/copybook_batch_validation.cbl) | [`examples/fixed/copybook_batch_validation.cbl`](examples/fixed/copybook_batch_validation.cbl) (`-std=ibm-strict`) | IBM Db2 `EXEC SQL DECLARE` DCLGEN parsing, layout introspection, multi-dialect DDL emission, level-`88` `THRU` validation, `update`, and `OCCURS` batch hydration (`find_all`) |
+| Mainframe Codecs & COMMAREA | [`examples/free/mainframe_codecs_and_commarea.cbl`](examples/free/mainframe_codecs_and_commarea.cbl) | [`examples/fixed/mainframe_codecs_and_commarea.cbl`](examples/fixed/mainframe_codecs_and_commarea.cbl) (`-std=ibm-strict`) | 38-digit decimal `mul`/`div`/`cmp` (`HALF_EVEN`), EBCDIC Zoned Decimal & big-endian `COMP` codecs, `IBM1047` & UTF-16 `GRAPHIC` round-trips, and 544B `CORM-COMMAREA` |
+| Legacy Payroll Batch (COBOL-60..85) | — | [`examples/fixed/legacy_commarea_payroll.cbl`](examples/fixed/legacy_commarea_payroll.cbl) (`-std=cobol85`) | Endian-independent 552B pure `USAGE DISPLAY` `COMMAREA` transactional batch insert & cursor query with zero `USAGE POINTER` or `BY VALUE` |
 
 ---
 
@@ -215,7 +220,7 @@ All examples exist in **both** free-format (`examples/free/`) and strict fixed 8
 
 | Gate | Command | Requirement |
 | :--- | :--- | :--- |
-| Full CTest Suite (25 tests) | `ctest --test-dir build --output-on-failure` | 25/25 passing (C89, ABI, 10 eras, E2E, IBM/MF strict, 8 examples) |
+| Full CTest Suite (34 tests) | `ctest --test-dir build --output-on-failure` | 34/34 passing (C89, ABI, 10 eras, E2E, IBM/MF strict, 17 examples) |
 | C89 Coverage (100%) | `gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov` | 100.0% fn (`150/150`), 100.0% line (`2327/2327`), 100.0% branch (`1036/1036`) |
 | COBOL Coverage (100%) | `python3 scripts/check_cobol_coverage.py --build-dir build` | 100.0% fn (`42/42`), 100.0% line (`114/114`), 100.0% branch (`12/12`), 10/10 eras |
 | Documentation Coverage (100%) | `python3 scripts/generate_undercovered.py --doc` | Zero Doxygen warnings (incl. `src/generated/`) + zero COBOL doc gaps |
@@ -237,7 +242,7 @@ cobol-orm/
 ├── copybooks/{free,fixed,era}/      # Idiomatic error/type/IBM-Enterprise & 552B DISPLAY Copybooks
 ├── cobol/{free,fixed}/              # 21-subprogram CORM-* wrapper library (free + IBM-strict fixed-80)
 ├── cobol/era/cobol60..cobol2023/    # 10-standard COBOL verification suites (COBOL-60 .. COBOL-2023)
-├── examples/{free,fixed,migrations}/# 8 runnable free & fixed COBOL examples + sample SQL migrations
+├── examples/{free,fixed,migrations}/# 17 runnable free & fixed COBOL examples + sample SQL migrations
 ├── tests/{c,cobol}/                 # C89 unit/ABI/OOM suite (greatest.h) + free/fixed COBOL E2E suites
 ├── scripts/                         # Codegen, fixed-80 converter, real coverage, doc, clang-lint & shield scripts
 └── docs/                            # Detailed API, Copybook CRUD, Enterprise Fixed-80, Error & Memory guides

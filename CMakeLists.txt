@@ -359,6 +359,10 @@ if(COBOL_ORM_BUILD_TESTS)
           "${CMAKE_CURRENT_SOURCE_DIR}/cobol/fixed/cobol_orm_lib.cbl"
           "${CMAKE_CURRENT_SOURCE_DIR}/tests/cobol/test_e2e_fixed.cbl"
           "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/migrations_and_pool.cbl"
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/prepared_statements.cbl"
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/abstract_result_set.cbl"
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/copybook_batch_validation.cbl"
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/mainframe_codecs_and_commarea.cbl"
       )
       add_test(NAME cobol_mf_strict_syntax
         COMMAND "${GNUCOBOL_COBC_EXECUTABLE}" -fsyntax-only -fixed -std=mf-strict -Wall -Wextra -Werror
@@ -390,6 +394,22 @@ if(COBOL_ORM_BUILD_TESTS)
           "${CMAKE_CURRENT_SOURCE_DIR}/examples/free/migrations_and_pool.cbl"
           "" "-free" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/free"
           "${_cobol_mod_dir}/cobol_orm_lib_free.o" "EX-POOL-DEMO OK")
+        cobol_orm_add_cobol_test(example_free_prepared_statements
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/free/prepared_statements.cbl"
+          "" "-free" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/free"
+          "${_cobol_mod_dir}/cobol_orm_lib_free.o" "EX-PREP-STMT OK")
+        cobol_orm_add_cobol_test(example_free_abstract_rs
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/free/abstract_result_set.cbl"
+          "" "-free" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/free"
+          "${_cobol_mod_dir}/cobol_orm_lib_free.o" "EX-ABSTRACT-RS OK")
+        cobol_orm_add_cobol_test(example_free_copybook_batch
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/free/copybook_batch_validation.cbl"
+          "" "-free" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/free"
+          "${_cobol_mod_dir}/cobol_orm_lib_free.o" "EX-CPY-BATCH OK")
+        cobol_orm_add_cobol_test(example_free_mainframe_codecs
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/free/mainframe_codecs_and_commarea.cbl"
+          "" "-free" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/free"
+          "${_cobol_mod_dir}/cobol_orm_lib_free.o" "EX-MAINFRAME OK")
       endif()
       if(COBOL_ORM_BUILD_FIXED)
         cobol_orm_add_cobol_test(example_fixed_quickstart
@@ -408,6 +428,26 @@ if(COBOL_ORM_BUILD_TESTS)
           "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/migrations_and_pool.cbl"
           "-std=ibm-strict" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/fixed"
           "${_cobol_mod_dir}/cobol_orm_lib_fixed.o" "EX-POOL-DEMO OK")
+        cobol_orm_add_cobol_test(example_fixed_prepared_statements
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/prepared_statements.cbl"
+          "-std=ibm-strict" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/fixed"
+          "${_cobol_mod_dir}/cobol_orm_lib_fixed.o" "EX-PREP-STMT OK")
+        cobol_orm_add_cobol_test(example_fixed_abstract_rs
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/abstract_result_set.cbl"
+          "-std=ibm-strict" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/fixed"
+          "${_cobol_mod_dir}/cobol_orm_lib_fixed.o" "EX-ABSTRACT-RS OK")
+        cobol_orm_add_cobol_test(example_fixed_copybook_batch
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/copybook_batch_validation.cbl"
+          "-std=ibm-strict" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/fixed"
+          "${_cobol_mod_dir}/cobol_orm_lib_fixed.o" "EX-CPY-BATCH OK")
+        cobol_orm_add_cobol_test(example_fixed_mainframe_codecs
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/mainframe_codecs_and_commarea.cbl"
+          "-std=ibm-strict" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/fixed"
+          "${_cobol_mod_dir}/cobol_orm_lib_fixed.o" "EX-MAINFRAME OK")
+        cobol_orm_add_cobol_test(example_fixed_legacy_payroll
+          "${CMAKE_CURRENT_SOURCE_DIR}/examples/fixed/legacy_commarea_payroll.cbl"
+          "-std=cobol85" "-fixed" "${_cobc_warn_strict}" "${CMAKE_CURRENT_SOURCE_DIR}/copybooks/era"
+          "" "EX-LEG-PAY OK")
       endif()
     endif()
   endif()

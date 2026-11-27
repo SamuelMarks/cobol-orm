@@ -18,6 +18,7 @@
 #if defined(_WIN32)
 #include <direct.h>
 #else
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
