@@ -9,6 +9,7 @@ audits 100% C89 + COBOL documentation coverage when `--doc` is passed.
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -18,11 +19,23 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
+def is_clang_compiler(cc="cc"):
+    """Return True if the active C compiler `cc` identifies itself as Clang."""
+    try:
+        out = subprocess.check_output(
+            [cc, "--version"], text=True, stderr=subprocess.STDOUT
+        )
+        return "clang" in out.lower()
+    except Exception:
+        return False
+
+
 def get_gcov_executable():
-    """Select the gcov executable matching the host toolchain."""
+    """Select the gcov executable matching the active C compiler toolchain."""
     if sys.platform == "darwin" and shutil.which("xcrun"):
         return "xcrun llvm-cov gcov"
-    if shutil.which("llvm-cov"):
+    cc = os.environ.get("CC", "cc")
+    if is_clang_compiler(cc) and shutil.which("llvm-cov"):
         return "llvm-cov gcov"
     return "gcov"
 
@@ -57,14 +70,30 @@ def check_c_docs(root):
             if cdef.attrib.get("kind") == "dir":
                 continue
             cname = cdef.findtext("compoundname", default=xml_file.name)
-            brief = "".join(cdef.find("briefdescription").itertext()).strip() if cdef.find("briefdescription") is not None else ""
-            detail = "".join(cdef.find("detaileddescription").itertext()).strip() if cdef.find("detaileddescription") is not None else ""
+            brief = (
+                "".join(cdef.find("briefdescription").itertext()).strip()
+                if cdef.find("briefdescription") is not None
+                else ""
+            )
+            detail = (
+                "".join(cdef.find("detaileddescription").itertext()).strip()
+                if cdef.find("detaileddescription") is not None
+                else ""
+            )
             if not brief and not detail:
                 gaps.append(f"Undocumented C compound: {cname}")
             for mdef in cdef.findall(".//memberdef"):
                 mname = mdef.findtext("name", default="<anon>")
-                mb = "".join(mdef.find("briefdescription").itertext()).strip() if mdef.find("briefdescription") is not None else ""
-                md = "".join(mdef.find("detaileddescription").itertext()).strip() if mdef.find("detaileddescription") is not None else ""
+                mb = (
+                    "".join(mdef.find("briefdescription").itertext()).strip()
+                    if mdef.find("briefdescription") is not None
+                    else ""
+                )
+                md = (
+                    "".join(mdef.find("detaileddescription").itertext()).strip()
+                    if mdef.find("detaileddescription") is not None
+                    else ""
+                )
                 if not mb and not md:
                     gaps.append(f"Undocumented C member: {cname}::{mname}")
     return len(gaps) == 0, gaps
@@ -144,7 +173,9 @@ def collect_cobol_coverage(root, build_dir):
         res.stdout,
     )
     if not m:
-        raise RuntimeError(f"Unable to parse check_cobol_coverage.py output:\n{res.stdout}")
+        raise RuntimeError(
+            f"Unable to parse check_cobol_coverage.py output:\n{res.stdout}"
+        )
     return {
         "fn_hit": int(m.group(1)),
         "fn_total": int(m.group(2)),
@@ -167,9 +198,9 @@ Generated automatically by `scripts/generate_undercovered.py` against `build-cov
 
 | Layer | Functions | Lines | Branches | Status |
 | :--- | ---: | ---: | ---: | :--- |
-| **C89 FFI Facade (`src/*.c`, `src/generated/*.c`)** | **{c_cov['function_percent']:.1f}%** (`{c_cov['function_covered']} / {c_cov['function_total']}`) | **{c_cov['line_percent']:.1f}%** (`{c_cov['line_covered']} / {c_cov['line_total']}`) | **{c_cov['branch_percent']:.1f}%** (`{c_cov['branch_covered']} / {c_cov['branch_total']}`) | **PASS (0 gaps)** |
-| **COBOL Wrapper Library (`cobol/{{free,fixed}}/cobol_orm_lib.cbl`)** | **100.0%** (`{cob_cov['fn_hit']} / {cob_cov['fn_total']}`) | **100.0%** (`{cob_cov['line_hit']} / {cob_cov['line_total']}`) | **100.0%** (`{cob_cov['br_hit']} / {cob_cov['br_total']}`) | **PASS (0 gaps)** |
-| **COBOL Standard Era Matrix (`COBOL-60` .. `COBOL-2023`)** | **100.0%** (`{cob_cov['era_hit']} / {cob_cov['era_total']}`) | **100.0%** | **100.0%** | **PASS (0 gaps)** |
+| **C89 FFI Facade (`src/*.c`, `src/generated/*.c`)** | **{c_cov["function_percent"]:.1f}%** (`{c_cov["function_covered"]} / {c_cov["function_total"]}`) | **{c_cov["line_percent"]:.1f}%** (`{c_cov["line_covered"]} / {c_cov["line_total"]}`) | **{c_cov["branch_percent"]:.1f}%** (`{c_cov["branch_covered"]} / {c_cov["branch_total"]}`) | **PASS (0 gaps)** |
+| **COBOL Wrapper Library (`cobol/{{free,fixed}}/cobol_orm_lib.cbl`)** | **100.0%** (`{cob_cov["fn_hit"]} / {cob_cov["fn_total"]}`) | **100.0%** (`{cob_cov["line_hit"]} / {cob_cov["line_total"]}`) | **100.0%** (`{cob_cov["br_hit"]} / {cob_cov["br_total"]}`) | **PASS (0 gaps)** |
+| **COBOL Standard Era Matrix (`COBOL-60` .. `COBOL-2023`)** | **100.0%** (`{cob_cov["era_hit"]} / {cob_cov["era_total"]}`) | **100.0%** | **100.0%** | **PASS (0 gaps)** |
 | **Documentation Coverage (C89 `include/`+`src/`+`src/generated/` & COBOL)** | **100.0%** | **100.0%** | **100.0%** | **PASS (0 gaps)** |
 
 ## Uncovered Items
@@ -181,11 +212,23 @@ None — 100.0% function, line, and branch test coverage and 100.0% documentatio
 
 def main():
     """CLI entry point for documentation and test coverage ledger generation."""
-    parser = argparse.ArgumentParser(description="Verify 100% doc/test coverage and update UNDERCOVERED.md.")
-    parser.add_argument("--doc", action="store_true", help="Run 100% C89 + COBOL documentation coverage audit")
+    parser = argparse.ArgumentParser(
+        description="Verify 100% doc/test coverage and update UNDERCOVERED.md."
+    )
+    parser.add_argument(
+        "--doc",
+        action="store_true",
+        help="Run 100% C89 + COBOL documentation coverage audit",
+    )
     parser.add_argument("--root", default=".", help="Repository root directory")
-    parser.add_argument("--cov-dir", default="build-cov", help="Coverage-instrumented CMake build directory")
-    parser.add_argument("--build-dir", default="build", help="Standard CMake build directory")
+    parser.add_argument(
+        "--cov-dir",
+        default="build-cov",
+        help="Coverage-instrumented CMake build directory",
+    )
+    parser.add_argument(
+        "--build-dir", default="build", help="Standard CMake build directory"
+    )
     args = parser.parse_args()
     root = Path(args.root).resolve()
 
@@ -196,7 +239,9 @@ def main():
             for g in c_gaps + cob_gaps:
                 print(f"DOC GAP: {g}", file=sys.stderr)
             return 1
-        print("OK: 100.0% documentation coverage across all C89 headers/sources/generated shims and COBOL files.")
+        print(
+            "OK: 100.0% documentation coverage across all C89 headers/sources/generated shims and COBOL files."
+        )
         return 0
 
     c_cov = collect_c_coverage(root, root / args.cov_dir)

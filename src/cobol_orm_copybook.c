@@ -224,23 +224,24 @@ wrap_cpy_record(c_orm_cobol_record_t *rec, cobol_orm_cpy_t **out_cpy) {
  */
 static COBOL_ORM_NO_DISCARD cobol_orm_error_t bind_variant_param(
     c_orm_db_t *db, c_orm_query_t *q, int idx, const cdd_c_variant_t *var) {
-  switch (var->type) {
-  case CDD_C_VARIANT_TYPE_INT:
+  if (var->type == CDD_C_VARIANT_TYPE_INT) {
     return cobol_orm_from_c_orm(
         db->vtable->bind_int64(q, idx, (int64_t)var->value.i_val));
-  case CDD_C_VARIANT_TYPE_FLOAT:
+  }
+  if (var->type == CDD_C_VARIANT_TYPE_FLOAT) {
     return cobol_orm_from_c_orm(
         db->vtable->bind_double(q, idx, var->value.f_val));
-  case CDD_C_VARIANT_TYPE_STRING:
+  }
+  if (var->type == CDD_C_VARIANT_TYPE_STRING) {
     return cobol_orm_from_c_orm(
         db->vtable->bind_string(q, idx, var->value.s_val));
-  case CDD_C_VARIANT_TYPE_DECIMAL:
+  }
+  if (var->type == CDD_C_VARIANT_TYPE_DECIMAL) {
     return cobol_orm_from_c_orm(
         db->vtable->bind_decimal(q, idx, &var->value.d_val));
-  default:
-    return cobol_orm_from_c_orm(db->vtable->bind_blob(
-        q, idx, var->value.b_val.data, var->value.b_val.size));
   }
+  return cobol_orm_from_c_orm(db->vtable->bind_blob(
+      q, idx, var->value.b_val.data, var->value.b_val.size));
 }
 
 /**

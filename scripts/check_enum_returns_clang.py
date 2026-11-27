@@ -67,7 +67,9 @@ def should_exclude(filepath, exclude_patterns, use_default_exceptions):
         if fnmatch.fnmatch(filepath, pat) or fnmatch.fnmatch(path.name, pat):
             return True
     if use_default_exceptions:
-        if fnmatch.fnmatch(path.name, "test_*.c") or fnmatch.fnmatch(path.name, "test_*.h"):
+        if fnmatch.fnmatch(path.name, "test_*.c") or fnmatch.fnmatch(
+            path.name, "test_*.h"
+        ):
             return True
         if any(p in path.parts for p in ("tests", "test", "_deps", "generated")):
             return True
@@ -85,7 +87,11 @@ def gather_files(paths, exclude_patterns, use_default_exceptions):
             found.extend(str(x) for x in p.rglob("*.c"))
             found.extend(str(x) for x in p.rglob("*.h"))
     return sorted(
-        set(f for f in found if not should_exclude(f, exclude_patterns, use_default_exceptions))
+        set(
+            f
+            for f in found
+            if not should_exclude(f, exclude_patterns, use_default_exceptions)
+        )
     )
 
 
@@ -110,7 +116,13 @@ def build_parse_args(filename, base_args, comp_db):
                 if a == "-o":
                     skip = True
                     continue
-                if a in ("-c", filename, os.path.abspath(filename), cmd_file, os.path.abspath(cmd_file)):
+                if a in (
+                    "-c",
+                    filename,
+                    os.path.abspath(filename),
+                    cmd_file,
+                    os.path.abspath(cmd_file),
+                ):
                     continue
                 filtered.append(a)
             if filename.endswith(".h"):
@@ -118,7 +130,9 @@ def build_parse_args(filename, base_args, comp_db):
                 i = 0
                 while i < len(filtered):
                     a = filtered[i]
-                    if a in ("-I", "-D", "-isystem", "-isysroot") and i + 1 < len(filtered):
+                    if a in ("-I", "-D", "-isystem", "-isysroot") and i + 1 < len(
+                        filtered
+                    ):
                         hdr_args.extend([a, filtered[i + 1]])
                         i += 2
                         continue
@@ -130,12 +144,14 @@ def build_parse_args(filename, base_args, comp_db):
                 args = filtered
     if sys.platform == "darwin" and "-isysroot" not in args:
         try:
-            sdk = subprocess.check_output(["xcrun", "--show-sdk-path"], text=True).strip()
+            sdk = subprocess.check_output(
+                ["xcrun", "--show-sdk-path"], text=True
+            ).strip()
             if sdk and os.path.exists(sdk):
                 args.extend(["-isysroot", sdk])
         except Exception:
             pass
-    for inc in ("include", "src", "../c-orm/include"):
+    for inc in ("include", "src", "../c-orm/include", "build/_deps/c_orm-src/include"):
         if os.path.isdir(inc) and not any(inc in a for a in args):
             args.append(f"-I{inc}")
     return args
@@ -151,11 +167,16 @@ def check_file(filename, base_args, comp_db, use_default_exceptions):
     for cur in tu.cursor.walk_preorder():
         if cur.kind != CursorKind.FUNCTION_DECL:
             continue
-        if not cur.location.file or os.path.abspath(cur.location.file.name) != abs_target:
+        if (
+            not cur.location.file
+            or os.path.abspath(cur.location.file.name) != abs_target
+        ):
             continue
         if cur.spelling in EXEMPT_FUNCTIONS:
             continue
-        if use_default_exceptions and (cur.spelling == "main" or cur.spelling.startswith("test_")):
+        if use_default_exceptions and (
+            cur.spelling == "main" or cur.spelling.startswith("test_")
+        ):
             continue
         canon = cur.result_type.get_canonical()
         if canon.kind != TypeKind.ENUM:
@@ -170,12 +191,20 @@ def check_file(filename, base_args, comp_db, use_default_exceptions):
 
 def main():
     """CLI entry point for enum-return enforcement."""
-    parser = argparse.ArgumentParser(description="Enforce enum return types via libclang.")
+    parser = argparse.ArgumentParser(
+        description="Enforce enum return types via libclang."
+    )
     parser.add_argument("paths", nargs="+", help="Files or directories to check")
-    parser.add_argument("-p", "--build-dir", help="Build directory with compile_commands.json")
+    parser.add_argument(
+        "-p", "--build-dir", help="Build directory with compile_commands.json"
+    )
     parser.add_argument("--libclang-path", help="Explicit libclang library path")
-    parser.add_argument("--exclude-files", action="append", default=[], help="Glob exclusions")
-    parser.add_argument("--no-default-exceptions", action="store_true", help="Check tests too")
+    parser.add_argument(
+        "--exclude-files", action="append", default=[], help="Glob exclusions"
+    )
+    parser.add_argument(
+        "--no-default-exceptions", action="store_true", help="Check tests too"
+    )
     args = parser.parse_args()
 
     configure_libclang(args.libclang_path)
@@ -184,13 +213,18 @@ def main():
         try:
             comp_db = CompilationDatabase.fromDirectory(args.build_dir)
         except CompilationDatabaseError as exc:
-            print(f"Error loading compile_commands.json from {args.build_dir}: {exc}", file=sys.stderr)
+            print(
+                f"Error loading compile_commands.json from {args.build_dir}: {exc}",
+                file=sys.stderr,
+            )
             return 1
 
     files = gather_files(args.paths, args.exclude_files, not args.no_default_exceptions)
     total = 0
     for f in files:
-        total += check_file(f, ["-x", "c", "-std=c90"], comp_db, not args.no_default_exceptions)
+        total += check_file(
+            f, ["-x", "c", "-std=c90"], comp_db, not args.no_default_exceptions
+        )
     if total == 0:
         print(f"OK: {len(files)} C files passed enum-return enforcement.")
     return 1 if total > 0 else 0

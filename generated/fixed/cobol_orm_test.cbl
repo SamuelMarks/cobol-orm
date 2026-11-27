@@ -1,11 +1,22 @@
-      * Auto-generated COBOL Copybook layout verification program
+      * @file cobol_orm_test.cbl
+      * @brief Auto-generated COBOL Copybook ABI layout test program.
+      * @module TST-COBOL-ORM
+      * @details Verifies FUNCTION BYTE-LENGTH against C ABI layout
+      * sizes.
        IDENTIFICATION DIVISION.
        PROGRAM-ID. TST-COBOL-ORM.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        COPY "cobol_orm.cpy".
+      * @record WS-ACTUAL-LEN Measured byte size of current record.
        01 WS-ACTUAL-LEN USAGE BINARY-LONG UNSIGNED VALUE 0.
+      * @subprogram TST-COBOL-ORM Run ABI byte-length assertions.
+      * @return Returns 0 on exact match; non-zero exit on mismatch.
+      * @errors Exits with status 1 if any record size mismatches C ABI.
        PROCEDURE DIVISION.
+      * @paragraph MAIN-ENTRY Verify every emitted C struct and union
+      * size.
+           MAIN-ENTRY.
            MOVE CDD-FFI-ABI-READY TO WS-ACTUAL-LEN
            MOVE FUNCTION BYTE-LENGTH(COBOL-ORM-DECIMAL) TO WS-ACTUAL-LEN
            IF WS-ACTUAL-LEN NOT = 41

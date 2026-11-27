@@ -45,14 +45,25 @@ def format_doxygen_brief(text, indent=""):
     return f"{indent}/** @brief {clean} */\n"
 
 
+def prev_is_doc(out):
+    """Return True if the last non-empty emitted line closes a Doxygen comment."""
+    for prev in reversed(out):
+        s = prev.strip()
+        if not s:
+            continue
+        return s.endswith("*/")
+    return False
+
+
 def annotate_shim_header(hdr_text, struct_docs, field_docs):
-    """Inject complete Doxygen comments into a cdd-c COBOL shim header."""
+    """Inject missing Doxygen comments into a cdd-c COBOL shim header."""
     lines = hdr_text.splitlines(keepends=True)
     out = []
     cur_struct = None
     in_struct = False
 
     guard_re = re.compile(r"^#define\s+(CDD_COBOL_SHIM_[A-Z0-9_]+)\s*$")
+    defgroup_re = re.compile(r"^\*\s*@defgroup\s+([A-Za-z0-9_]+)\s+(.+?)\s*$")
     struct_re = re.compile(r"^(struct|union)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{\s*$")
     field_re = re.compile(r"^  .*?\b([A-Za-z_][A-Za-z0-9_]*)(?:\[\d+\])?;\s*$")
 
@@ -61,36 +72,63 @@ def annotate_shim_header(hdr_text, struct_docs, field_docs):
         line = lines[i]
         stripped = line.strip()
 
+        dm = defgroup_re.match(stripped)
+        if dm and any("@file" in prev for prev in out[-6:]):
+            out.append(" */\n")
+            out.append("/**\n")
+            out.append(line)
+            out.append(f" * @brief {dm.group(2)}.\n")
+            i += 1
+            continue
+
         gm = guard_re.match(stripped)
         if gm:
-            out.append(f"/** @brief Header guard for generated shim ({gm.group(1)}). */\n")
+            if not prev_is_doc(out):
+                out.append(
+                    f"/** @brief Header guard for generated shim ({gm.group(1)}). */\n"
+                )
             out.append(line)
             i += 1
             continue
 
-        if "typedef __int64 cdd_cob_i64;" in line or "typedef long long cdd_cob_i64;" in line or "typedef long cdd_cob_i64;" in line:
-            out.append("/** @brief Portable 64-bit signed integer type for COBOL ABI shims. */\n")
+        if (
+            "typedef __int64 cdd_cob_i64;" in line
+            or "typedef long long cdd_cob_i64;" in line
+            or "typedef long cdd_cob_i64;" in line
+        ):
+            if not prev_is_doc(out):
+                out.append(
+                    "/** @brief Portable 64-bit signed integer type for COBOL ABI shims. */\n"
+                )
             out.append(line)
             i += 1
             continue
 
-        if "typedef unsigned __int64 cdd_cob_u64;" in line or "typedef unsigned long long cdd_cob_u64;" in line or "typedef unsigned long cdd_cob_u64;" in line:
-            out.append("/** @brief Portable 64-bit unsigned integer type for COBOL ABI shims. */\n")
+        if (
+            "typedef unsigned __int64 cdd_cob_u64;" in line
+            or "typedef unsigned long long cdd_cob_u64;" in line
+            or "typedef unsigned long cdd_cob_u64;" in line
+        ):
+            if not prev_is_doc(out):
+                out.append(
+                    "/** @brief Portable 64-bit unsigned integer type for COBOL ABI shims. */\n"
+                )
             out.append(line)
             i += 1
             continue
 
         if stripped.startswith("int cdd_cobol_str_to_pic_x("):
-            out.append(
-                "/**\n"
-                " * @brief Copies a NUL-terminated C string into a space-padded COBOL PIC X buffer.\n"
-                " *\n"
-                " * @param[in] c_str Source NUL-terminated C string (or NULL for blank-fill).\n"
-                " * @param[out] cob_buf Destination COBOL PIC X character buffer.\n"
-                " * @param[in] cob_len Capacity of `cob_buf` in bytes.\n"
-                " * @return `0` on success, or `-1` if `cob_buf` is NULL.\n"
-                " */\n"
-            )
+            if not prev_is_doc(out):
+                out.append(
+                    "/**\n"
+                    " * @brief Copies a NUL-terminated C string into a space-padded COBOL PIC X buffer.\n"
+                    " *\n"
+                    " * @param[in] c_str Source NUL-terminated C string (or NULL for blank-fill).\n"
+                    " * @param[out] cob_buf Destination COBOL PIC X character buffer.\n"
+                    " * @param[in] cob_len Capacity of `cob_buf` in bytes.\n"
+                    " * @return `0` on success, or `-1` if `cob_buf` is NULL.\n"
+                    " */\n"
+                )
             out.append(line)
             i += 1
             continue
@@ -99,8 +137,11 @@ def annotate_shim_header(hdr_text, struct_docs, field_docs):
         if sm:
             cur_struct = sm.group(2)
             in_struct = True
-            sdoc = struct_docs.get(cur_struct, f"ABI shim mirror of {sm.group(1)} {cur_struct}.")
-            out.append(format_doxygen_brief(sdoc))
+            if not prev_is_doc(out):
+                sdoc = struct_docs.get(
+                    cur_struct, f"ABI shim mirror of {sm.group(1)} {cur_struct}."
+                )
+                out.append(format_doxygen_brief(sdoc))
             out.append(line)
             i += 1
             continue
@@ -114,7 +155,7 @@ def annotate_shim_header(hdr_text, struct_docs, field_docs):
 
         if in_struct and cur_struct:
             fm = field_re.match(line)
-            if fm:
+            if fm and "/**<" not in line and not prev_is_doc(out):
                 fname = fm.group(1)
                 fdoc = field_docs.get(cur_struct, {}).get(
                     fname, f"ABI field `{fname}` of `{cur_struct}`."
@@ -132,14 +173,20 @@ def annotate_shim_header(hdr_text, struct_docs, field_docs):
 
 def main():
     """CLI entry point for annotating generated C89 COBOL ABI shim headers."""
-    parser = argparse.ArgumentParser(description="Annotate cdd-c COBOL shim header with Doxygen comments.")
+    parser = argparse.ArgumentParser(
+        description="Annotate cdd-c COBOL shim header with Doxygen comments."
+    )
     parser.add_argument("--ir", required=True, help="Path to normalized FFI IR JSON")
-    parser.add_argument("--header", required=True, help="Path to *_cobol_shim.h to annotate in place")
+    parser.add_argument(
+        "--header", required=True, help="Path to *_cobol_shim.h to annotate in place"
+    )
     args = parser.parse_args()
 
     struct_docs, field_docs = load_ir_docs(args.ir)
     hdr_path = Path(args.header)
-    annotated = annotate_shim_header(hdr_path.read_text(encoding="utf-8"), struct_docs, field_docs)
+    annotated = annotate_shim_header(
+        hdr_path.read_text(encoding="utf-8"), struct_docs, field_docs
+    )
     hdr_path.write_text(annotated, encoding="utf-8")
     return 0
 

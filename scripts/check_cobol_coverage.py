@@ -51,7 +51,9 @@ def find_ffi_library(root, build_dir):
 def find_cobc_inc_dir():
     """Discover GnuCOBOL libcob.h include directory via cobc --info or common prefixes."""
     try:
-        out = subprocess.check_output(["cobc", "--info"], text=True, stderr=subprocess.STDOUT)
+        out = subprocess.check_output(
+            ["cobc", "--info"], text=True, stderr=subprocess.STDOUT
+        )
         for line in out.splitlines():
             m = re.search(r"-I\s*(\S+)", line)
             if m and Path(m.group(1), "libcob.h").is_file():
@@ -64,13 +66,24 @@ def find_cobc_inc_dir():
     return None
 
 
-def get_gcov_cmd():
-    """Return appropriate gcov command vector for macOS/Clang or Linux/GCC."""
+def is_clang_compiler(cc):
+    """Return True if the C compiler `cc` identifies itself as Clang/LLVM."""
+    try:
+        out = subprocess.check_output(
+            [cc, "--version"], text=True, stderr=subprocess.STDOUT
+        )
+        return "clang" in out.lower()
+    except Exception:
+        return False
+
+
+def get_gcov_cmd(cc="cc"):
+    """Return appropriate gcov command vector matching the compiler `cc`."""
     if sys.platform == "darwin" and shutil.which("xcrun"):
-        return ["xcrun", "llvm-cov", "gcov", "-b"]
-    if shutil.which("llvm-cov"):
-        return ["llvm-cov", "gcov", "-b"]
-    return ["gcov", "-b"]
+        return ["xcrun", "llvm-cov", "gcov", "-b", "-c"]
+    if is_clang_compiler(cc) and shutil.which("llvm-cov"):
+        return ["llvm-cov", "gcov", "-b", "-c"]
+    return ["gcov", "-b", "-c"]
 
 
 def measure_cobol_lib(root, mode, lib_rel, test_rel, copybook_dir, ffi_lib, cobc_inc):
@@ -128,20 +141,48 @@ def measure_cobol_lib(root, mode, lib_rel, test_rel, copybook_dir, ffi_lib, cobc
             str(runner),
             str(test_src),
             str(gen_o),
-            str(ffi_lib),
-            "-Q",
-            f"-Wl,-rpath,{ffi_lib.parent}",
-            "-Q",
-            "--coverage",
         ]
+        if sys.platform.startswith("linux"):
+            cobc_link.extend(
+                [
+                    "-Q",
+                    "-Wl,--no-as-needed",
+                    "-Q",
+                    str(ffi_lib),
+                    "-Q",
+                    "-Wl,--as-needed",
+                    "-Q",
+                    f"-Wl,-rpath,{ffi_lib.parent}",
+                    "-Q",
+                    "-Wl,--export-dynamic",
+                    "-Q",
+                    "--coverage",
+                ]
+            )
+        else:
+            cobc_link.extend(
+                [
+                    str(ffi_lib),
+                    "-Q",
+                    f"-Wl,-rpath,{ffi_lib.parent}",
+                    "-Q",
+                    "--coverage",
+                ]
+            )
         subprocess.run(cobc_link, check=True, cwd=str(tmp_path))
 
         # 4. Run E2E COBOL test from repository root
         subprocess.run([str(runner)], check=True, cwd=str(root))
 
         # 5. Collect gcov branch + line execution report for generated C
-        gcov_cmd = get_gcov_cmd() + [str(gen_c)]
-        subprocess.run(gcov_cmd, check=True, cwd=str(tmp_path), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        gcov_cmd = get_gcov_cmd(cc) + [str(gen_c)]
+        subprocess.run(
+            gcov_cmd,
+            check=True,
+            cwd=str(tmp_path),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
         gcov_file = tmp_path / f"{gen_c.name}.gcov"
         if not gcov_file.is_file():
@@ -154,9 +195,9 @@ def parse_cobol_gcov(gcov_file, label):
     """Map GnuCOBOL C gcov line/branch counters back to COBOL PROGRAM-IDs, lines, and IF/EVALUATE branches."""
     lines = gcov_file.read_text(encoding="utf-8", errors="replace").splitlines()
 
-    entries = {}      # prog_name -> exec_count
-    stmt_lines = {}   # (cob_line, stmt_kind) -> max_exec_count
-    branches = {}     # cob_line -> list of taken counts for the primary conditional if()
+    entries = {}  # prog_name -> exec_count
+    stmt_lines = {}  # (cob_line, stmt_kind) -> max_exec_count
+    branches = {}  # cob_line -> list of taken counts for the primary conditional if()
 
     cur_entry = None
     cur_stmt_key = None
@@ -221,7 +262,11 @@ def parse_cobol_gcov(gcov_file, label):
 
         if cur_cond_line is not None and not cond_if_seen and "if (" in code:
             cond_if_seen = True
-        elif cur_cond_line is not None and cond_if_seen and len(branches[cur_cond_line]) >= 2:
+        elif (
+            cur_cond_line is not None
+            and cond_if_seen
+            and len(branches[cur_cond_line]) >= 2
+        ):
             # Stop collecting branches after the primary COBOL IF condition's 2 outcomes
             cond_if_seen = False
 
@@ -266,13 +311,20 @@ def main():
         description="Verify 100% COBOL wrapper function, line, and branch coverage + 10-era matrix."
     )
     parser.add_argument("--root", default=".", help="Repository root directory")
-    parser.add_argument("--build-dir", default="build", help="CMake build directory containing libcobol_orm_ffi")
+    parser.add_argument(
+        "--build-dir",
+        default="build",
+        help="CMake build directory containing libcobol_orm_ffi",
+    )
     args = parser.parse_args()
     root = Path(args.root).resolve()
 
     ffi_lib = find_ffi_library(root, root / args.build_dir)
     if not ffi_lib:
-        print("FAIL: libcobol_orm_ffi shared library not found; build the project first.", file=sys.stderr)
+        print(
+            "FAIL: libcobol_orm_ffi shared library not found; build the project first.",
+            file=sys.stderr,
+        )
         return 1
 
     cobc_inc = find_cobc_inc_dir()
@@ -288,21 +340,38 @@ def main():
         "cobol2014",
         "cobol2023",
     ]
-    missing_eras = [e for e in era_dirs if not list((root / "cobol/era" / e).glob("*.cbl"))]
+    missing_eras = [
+        e for e in era_dirs if not list((root / "cobol/era" / e).glob("*.cbl"))
+    ]
     if missing_eras:
         for e in missing_eras:
-            print(f"FAIL: missing COBOL standard era directory 'cobol/era/{e}'", file=sys.stderr)
+            print(
+                f"FAIL: missing COBOL standard era directory 'cobol/era/{e}'",
+                file=sys.stderr,
+            )
         return 1
 
     targets = [
-        ("free", "cobol/free/cobol_orm_lib.cbl", "tests/cobol/test_e2e_free.cbl", "copybooks/free"),
-        ("fixed", "cobol/fixed/cobol_orm_lib.cbl", "tests/cobol/test_e2e_fixed.cbl", "copybooks/fixed"),
+        (
+            "free",
+            "cobol/free/cobol_orm_lib.cbl",
+            "tests/cobol/test_e2e_free.cbl",
+            "copybooks/free",
+        ),
+        (
+            "fixed",
+            "cobol/fixed/cobol_orm_lib.cbl",
+            "tests/cobol/test_e2e_fixed.cbl",
+            "copybooks/fixed",
+        ),
     ]
 
     failed = False
     tot_fn_hit = tot_fn = tot_ln_hit = tot_ln = tot_br_hit = tot_br = 0
     for mode, lib_rel, test_rel, cpy_dir in targets:
-        res = measure_cobol_lib(root, mode, lib_rel, test_rel, cpy_dir, ffi_lib, cobc_inc)
+        res = measure_cobol_lib(
+            root, mode, lib_rel, test_rel, cpy_dir, ffi_lib, cobc_inc
+        )
         tot_fn_hit += res["fn_hit"]
         tot_fn += res["fn_total"]
         tot_ln_hit += res["line_hit"]
@@ -319,11 +388,20 @@ def main():
         if res["missed_fn"] or res["missed_lines"] or res["missed_br"]:
             failed = True
             for fn in res["missed_fn"]:
-                print(f"  FAIL: uncovered PROGRAM-ID '{fn}' in {res['label']}", file=sys.stderr)
+                print(
+                    f"  FAIL: uncovered PROGRAM-ID '{fn}' in {res['label']}",
+                    file=sys.stderr,
+                )
             for ln, kind in res["missed_lines"]:
-                print(f"  FAIL: uncovered COBOL line {ln} ({kind}) in {res['label']}", file=sys.stderr)
+                print(
+                    f"  FAIL: uncovered COBOL line {ln} ({kind}) in {res['label']}",
+                    file=sys.stderr,
+                )
             for ln, bidx in res["missed_br"]:
-                print(f"  FAIL: uncovered COBOL branch {bidx} at line {ln} in {res['label']}", file=sys.stderr)
+                print(
+                    f"  FAIL: uncovered COBOL branch {bidx} at line {ln} in {res['label']}",
+                    file=sys.stderr,
+                )
 
     if failed or tot_fn == 0 or tot_ln == 0 or tot_br == 0:
         return 1

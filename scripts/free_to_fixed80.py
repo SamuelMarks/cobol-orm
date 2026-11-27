@@ -147,18 +147,26 @@ def verify_fixed_file(path):
             if len(line) > 72:
                 errors.append(f"{path}:{lineno}: exceeds column 72 ({len(line)} chars)")
             if "*>" in line or ">>SOURCE FORMAT" in line.upper():
-                errors.append(f"{path}:{lineno}: forbidden free-format token in fixed file")
+                errors.append(
+                    f"{path}:{lineno}: forbidden free-format token in fixed file"
+                )
             if line and len(line) >= 7:
                 ind = line[6]
                 if ind not in (" ", "*", "/", "-", "D", "d"):
-                    errors.append(f"{path}:{lineno}: invalid column 7 indicator '{ind}'")
+                    errors.append(
+                        f"{path}:{lineno}: invalid column 7 indicator '{ind}'"
+                    )
     return errors
 
 
 def main():
     """CLI entry point for free_to_fixed80.py."""
-    parser = argparse.ArgumentParser(description="Convert or verify fixed 80-column COBOL.")
-    parser.add_argument("--verify", nargs="+", help="Verify fixed-format compliance on files/dirs")
+    parser = argparse.ArgumentParser(
+        description="Convert or verify fixed 80-column COBOL."
+    )
+    parser.add_argument(
+        "--verify", nargs="+", help="Verify fixed-format compliance on files/dirs"
+    )
     parser.add_argument("-i", "--input", help="Input free-format .cpy/.cbl file")
     parser.add_argument("-o", "--output", help="Output fixed-format .cpy/.cbl file")
     args = parser.parse_args()

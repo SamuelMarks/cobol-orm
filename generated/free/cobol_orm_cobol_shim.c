@@ -1,12 +1,20 @@
 /**
  * @file cobol_orm_cobol_shim.c
  * @brief Strict ISO C89 COBOL ABI shim implementation.
+ * @ingroup cobol_shim_cobol_orm
  */
 /* clang-format off */
 #include "cobol_orm_cobol_shim.h"
 #include <string.h>
 /* clang-format on */
 
+/**
+ * @brief Copies a NUL-terminated C string into a space-padded COBOL PIC X buffer.
+ * @param[in] c_str Optional source C string (NULL space-fills cob_buf).
+ * @param[out] cob_buf Destination COBOL PIC X character buffer.
+ * @param[in] cob_len Capacity of cob_buf in bytes.
+ * @return 0 on success, or -1 if cob_buf is NULL.
+ */
 int cdd_cobol_str_to_pic_x(const char *c_str, char *cob_buf,
                            unsigned int cob_len) {
   unsigned int copy_n;

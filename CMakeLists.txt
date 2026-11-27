@@ -13,6 +13,11 @@ endif()
 
 project(cobol-orm VERSION 0.1.0 LANGUAGES C)
 
+# Ensure static dependencies (c-orm, parson, sqlite3) are compiled with -fPIC so
+# they link cleanly into shared targets (cobol_orm_ffi and BUILD_SHARED_LIBS=ON)
+# on Linux ELF (preventing R_X86_64_TPOFF32 local-exec TLS relocation errors).
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(GNUInstallDirs)
 include(FetchContent)
@@ -249,10 +254,20 @@ if(COBOL_ORM_BUILD_TESTS)
       if(NOT "${EXTRA_OBJ}" STREQUAL "")
         list(APPEND _cobc_args "${EXTRA_OBJ}")
       endif()
-      list(APPEND _cobc_args
-        "$<TARGET_FILE:cobol_orm_ffi>"
-        "-Q" "-Wl,-rpath,$<TARGET_FILE_DIR:cobol_orm_ffi>"
-      )
+      if(APPLE OR WIN32)
+        list(APPEND _cobc_args
+          "$<TARGET_FILE:cobol_orm_ffi>"
+          "-Q" "-Wl,-rpath,$<TARGET_FILE_DIR:cobol_orm_ffi>"
+        )
+      else()
+        list(APPEND _cobc_args
+          "-Q" "-Wl,--no-as-needed"
+          "-Q" "$<TARGET_FILE:cobol_orm_ffi>"
+          "-Q" "-Wl,--as-needed"
+          "-Q" "-Wl,-rpath,$<TARGET_FILE_DIR:cobol_orm_ffi>"
+          "-Q" "-Wl,--export-dynamic"
+        )
+      endif()
       set(_deps "${SRC_FILE}" cobol_orm_ffi)
       if(NOT "${EXTRA_OBJ}" STREQUAL "")
         list(APPEND _deps "${EXTRA_OBJ}")

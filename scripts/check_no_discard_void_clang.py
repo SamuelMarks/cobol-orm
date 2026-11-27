@@ -11,7 +11,12 @@ import os
 import sys
 from pathlib import Path
 import clang.cindex
-from clang.cindex import CompilationDatabase, CompilationDatabaseError, CursorKind, TypeKind
+from clang.cindex import (
+    CompilationDatabase,
+    CompilationDatabaseError,
+    CursorKind,
+    TypeKind,
+)
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from check_enum_returns_clang import build_parse_args, configure_libclang, gather_files
@@ -26,7 +31,10 @@ def check_file(filename, base_args, comp_db):
     errors = 0
 
     for cur in tu.cursor.walk_preorder():
-        if not cur.location.file or os.path.abspath(cur.location.file.name) != abs_target:
+        if (
+            not cur.location.file
+            or os.path.abspath(cur.location.file.name) != abs_target
+        ):
             continue
         if cur.kind == CursorKind.CSTYLE_CAST_EXPR:
             if cur.type.get_canonical().kind == TypeKind.VOID:
@@ -44,12 +52,20 @@ def check_file(filename, base_args, comp_db):
 
 def main():
     """CLI entry point for no-discard `(void)` cast verification."""
-    parser = argparse.ArgumentParser(description="Forbid (void) return-value discards via libclang.")
+    parser = argparse.ArgumentParser(
+        description="Forbid (void) return-value discards via libclang."
+    )
     parser.add_argument("paths", nargs="+", help="Files or directories to check")
-    parser.add_argument("-p", "--build-dir", help="Build directory with compile_commands.json")
+    parser.add_argument(
+        "-p", "--build-dir", help="Build directory with compile_commands.json"
+    )
     parser.add_argument("--libclang-path", help="Explicit libclang library path")
-    parser.add_argument("--exclude-files", action="append", default=[], help="Glob exclusions")
-    parser.add_argument("--no-default-exceptions", action="store_true", help="Include test files")
+    parser.add_argument(
+        "--exclude-files", action="append", default=[], help="Glob exclusions"
+    )
+    parser.add_argument(
+        "--no-default-exceptions", action="store_true", help="Include test files"
+    )
     args = parser.parse_args()
 
     configure_libclang(args.libclang_path)
@@ -58,7 +74,10 @@ def main():
         try:
             comp_db = CompilationDatabase.fromDirectory(args.build_dir)
         except CompilationDatabaseError as exc:
-            print(f"Error loading compile_commands.json from {args.build_dir}: {exc}", file=sys.stderr)
+            print(
+                f"Error loading compile_commands.json from {args.build_dir}: {exc}",
+                file=sys.stderr,
+            )
             return 1
 
     files = gather_files(args.paths, args.exclude_files, not args.no_default_exceptions)

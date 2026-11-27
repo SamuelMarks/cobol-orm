@@ -62,11 +62,19 @@ def update_readme_text(readme_text, c_cov, doc_ok):
 
 def main():
     """CLI entry point for updating or verifying README.md coverage shields."""
-    parser = argparse.ArgumentParser(description="Update or verify README.md coverage & doc badges.")
+    parser = argparse.ArgumentParser(
+        description="Update or verify README.md coverage & doc badges."
+    )
     parser.add_argument("--root", default=".", help="Repository root directory")
-    parser.add_argument("--cov-dir", default="build-cov", help="Coverage CMake build directory")
-    parser.add_argument("--build-dir", default="build", help="Standard CMake build directory")
-    parser.add_argument("--check", action="store_true", help="Fail if README.md badges are out of date")
+    parser.add_argument(
+        "--cov-dir", default="build-cov", help="Coverage CMake build directory"
+    )
+    parser.add_argument(
+        "--build-dir", default="build", help="Standard CMake build directory"
+    )
+    parser.add_argument(
+        "--check", action="store_true", help="Fail if README.md badges are out of date"
+    )
     args = parser.parse_args()
     root = Path(args.root).resolve()
 
@@ -86,7 +94,10 @@ def main():
 
     if args.check:
         if old_text != new_text:
-            print("FAIL: README.md shields are stale; run python3 scripts/update_shields.py.", file=sys.stderr)
+            print(
+                "FAIL: README.md shields are stale; run python3 scripts/update_shields.py.",
+                file=sys.stderr,
+            )
             return 1
         print("OK: README.md coverage and documentation shields are up to date.")
         return 0

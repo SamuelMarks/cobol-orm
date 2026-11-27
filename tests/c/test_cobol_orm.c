@@ -1725,6 +1725,8 @@ TEST test_branch_and_mock_vtable_coverage(void) {
   }
   ASSERT_EQ(COBOL_ORM_OK, cobol_orm_connect("sqlite://:memory:", 17, &db));
   ASSERT_EQ(COBOL_ORM_OK, cobol_orm_set_timezone(db, 0, "UTC", 0));
+  ASSERT_EQ(COBOL_ORM_OK, cobol_orm_disconnect(db));
+  db = NULL;
 
   /* 3. Pool: OOM on pool_acquire + release with tz_name == NULL */
   ASSERT_EQ(COBOL_ORM_OK,
@@ -1808,7 +1810,7 @@ TEST test_branch_and_mock_vtable_coverage(void) {
 #if defined(_WIN32)
     mk_rc = _mkdir(mdir);
 #else
-    mk_rc = mkdir(mdir, 0755);
+    mk_rc = mkdir(mdir, (mode_t)0755);
 #endif
     ASSERT(mk_rc == 0 || mk_rc == -1);
     fp = fopen(mup, "wb");

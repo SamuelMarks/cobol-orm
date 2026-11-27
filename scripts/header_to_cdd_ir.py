@@ -19,16 +19,18 @@ def configure_libclang():
     candidates = []
     if os.environ.get("LIBCLANG_PATH"):
         candidates.append(os.environ["LIBCLANG_PATH"])
-    candidates.extend([
-        "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib",
-        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib",
-        "/opt/homebrew/opt/llvm/lib/libclang.dylib",
-        "/usr/local/opt/llvm/lib/libclang.dylib",
-        "/usr/lib/llvm-18/lib/libclang.so",
-        "/usr/lib/llvm-17/lib/libclang.so",
-        "/usr/lib/x86_64-linux-gnu/libclang-18.so.1",
-        "/usr/lib/x86_64-linux-gnu/libclang.so",
-    ])
+    candidates.extend(
+        [
+            "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib",
+            "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib",
+            "/opt/homebrew/opt/llvm/lib/libclang.dylib",
+            "/usr/local/opt/llvm/lib/libclang.dylib",
+            "/usr/lib/llvm-18/lib/libclang.so",
+            "/usr/lib/llvm-17/lib/libclang.so",
+            "/usr/lib/x86_64-linux-gnu/libclang-18.so.1",
+            "/usr/lib/x86_64-linux-gnu/libclang.so",
+        ]
+    )
     for cand in candidates:
         if os.path.isfile(cand):
             Config.set_library_file(cand)
@@ -36,6 +38,7 @@ def configure_libclang():
         if os.path.isdir(cand):
             Config.set_library_path(cand)
             return
+
 
 # cdd_ffi_node_kind_t
 NODE_STRUCT = 0
@@ -179,7 +182,9 @@ def extract_param_intents(raw_doc):
     intents = {}
     if not raw_doc:
         return intents
-    for m in re.finditer(r"@param\[(in|out|in,out)\]\s+([A-Za-z_][A-Za-z0-9_]*)", raw_doc):
+    for m in re.finditer(
+        r"@param\[(in|out|in,out)\]\s+([A-Za-z_][A-Za-z0-9_]*)", raw_doc
+    ):
         mode, pname = m.group(1), m.group(2)
         if mode == "in":
             intents[pname] = INTENT_IN
@@ -209,21 +214,48 @@ def extract_ir(header_path, include_dir):
 
     # Pass 0: emit key integer/string macro constants from headers
     macro_defs = [
-        ("COBOL_ORM_DECIMAL_MAX_DIGITS", MACRO_INT, "38", "Maximum decimal digits in cobol_orm_decimal_t."),
-        ("COBOL_ORM_COMMAREA_DATA_CAP", MACRO_INT, "256", "Fixed COMMAREA string buffer capacity."),
-        ("COBOL_ORM_DISPLAY_COMMAREA_SIZE", MACRO_INT, "552", "Fixed USAGE DISPLAY COMMAREA byte length."),
-        ("COBOL_ORM_LEGACY_MAX_HANDLES", MACRO_INT, "64", "Maximum concurrent legacy handle slots."),
-        ("COBOL_ORM_VERSION_STR", MACRO_STRING, '"0.1.0"', "Library semantic version string."),
+        (
+            "COBOL_ORM_DECIMAL_MAX_DIGITS",
+            MACRO_INT,
+            "38",
+            "Maximum decimal digits in cobol_orm_decimal_t.",
+        ),
+        (
+            "COBOL_ORM_COMMAREA_DATA_CAP",
+            MACRO_INT,
+            "256",
+            "Fixed COMMAREA string buffer capacity.",
+        ),
+        (
+            "COBOL_ORM_DISPLAY_COMMAREA_SIZE",
+            MACRO_INT,
+            "552",
+            "Fixed USAGE DISPLAY COMMAREA byte length.",
+        ),
+        (
+            "COBOL_ORM_LEGACY_MAX_HANDLES",
+            MACRO_INT,
+            "64",
+            "Maximum concurrent legacy handle slots.",
+        ),
+        (
+            "COBOL_ORM_VERSION_STR",
+            MACRO_STRING,
+            '"0.1.0"',
+            "Library semantic version string.",
+        ),
     ]
     for mname, mtype, mval, mdoc in macro_defs:
-        nodes.append({
-            "kind": NODE_MACRO,
-            "name": mname,
-            "doc": mdoc,
-            "inferred_type": mtype,
-            "evaluated_value": mval,
-            "variants": [{"name": mname, "value": mval}],
-        })
+        nodes.append(
+            {
+                "kind": NODE_MACRO,
+                "name": mname,
+                "doc": mdoc,
+                "inferred_type": mtype,
+                "evaluated_value": mval,
+                "variants": [{"name": mname, "value": mval}],
+            }
+        )
 
     # Pass 1: collect enums and structs defined in include_dir
     for cur in tu.cursor.get_children():
@@ -243,18 +275,22 @@ def extract_ir(header_path, include_dir):
             for child in cur.get_children():
                 if child.kind == CursorKind.ENUM_CONSTANT_DECL:
                     vstr = str(child.enum_value)
-                    variants.append({
-                        "name": child.spelling,
-                        "value": vstr,
-                        "doc": clean_doc(child.raw_comment),
-                        "raw_spelling": vstr,
-                    })
-            nodes.append({
-                "kind": NODE_ENUM,
-                "name": ename,
-                "doc": clean_doc(cur.raw_comment),
-                "variants": variants,
-            })
+                    variants.append(
+                        {
+                            "name": child.spelling,
+                            "value": vstr,
+                            "doc": clean_doc(child.raw_comment),
+                            "raw_spelling": vstr,
+                        }
+                    )
+            nodes.append(
+                {
+                    "kind": NODE_ENUM,
+                    "name": ename,
+                    "doc": clean_doc(cur.raw_comment),
+                    "variants": variants,
+                }
+            )
 
         elif cur.kind == CursorKind.STRUCT_DECL:
             sname = cur.spelling
@@ -266,28 +302,36 @@ def extract_ir(header_path, include_dir):
                 fields = []
                 for fld in cur.get_children():
                     if fld.kind == CursorKind.FIELD_DECL:
-                        fields.append({
-                            "name": fld.spelling,
-                            "doc": clean_doc(fld.raw_comment),
-                            "type": map_clang_type(fld.type, known_structs, known_enums),
-                            "intent": INTENT_UNKNOWN,
-                        })
-                nodes.append({
-                    "kind": NODE_STRUCT,
-                    "name": sname,
-                    "doc": clean_doc(cur.raw_comment),
-                    "fields": fields,
-                })
+                        fields.append(
+                            {
+                                "name": fld.spelling,
+                                "doc": clean_doc(fld.raw_comment),
+                                "type": map_clang_type(
+                                    fld.type, known_structs, known_enums
+                                ),
+                                "intent": INTENT_UNKNOWN,
+                            }
+                        )
+                nodes.append(
+                    {
+                        "kind": NODE_STRUCT,
+                        "name": sname,
+                        "doc": clean_doc(cur.raw_comment),
+                        "fields": fields,
+                    }
+                )
             else:
                 # Forward-declared opaque handle struct
                 seen_structs.add(sname)
                 known_structs.add(sname)
-                nodes.append({
-                    "kind": NODE_STRUCT,
-                    "name": sname,
-                    "doc": clean_doc(cur.raw_comment),
-                    "fields": [],
-                })
+                nodes.append(
+                    {
+                        "kind": NODE_STRUCT,
+                        "name": sname,
+                        "doc": clean_doc(cur.raw_comment),
+                        "fields": [],
+                    }
+                )
 
     # Pass 2: collect all public exported functions
     for cur in tu.cursor.get_children():
@@ -317,30 +361,40 @@ def extract_ir(header_path, include_dir):
                     atype["kind"] = KIND_VOID
                     atype["is_const"] = 0
                     pintent = INTENT_UNKNOWN
-                params.append({
-                    "name": aname,
-                    "type": atype,
-                    "intent": pintent,
-                })
-            nodes.append({
-                "kind": NODE_FUNCTION,
-                "name": fname,
-                "doc": clean_doc(cur.raw_comment),
-                "return_or_base_type": map_clang_type(
-                    cur.result_type, known_structs, known_enums
-                ),
-                "fields": params,
-            })
+                params.append(
+                    {
+                        "name": aname,
+                        "type": atype,
+                        "intent": pintent,
+                    }
+                )
+            nodes.append(
+                {
+                    "kind": NODE_FUNCTION,
+                    "name": fname,
+                    "doc": clean_doc(cur.raw_comment),
+                    "return_or_base_type": map_clang_type(
+                        cur.result_type, known_structs, known_enums
+                    ),
+                    "fields": params,
+                }
+            )
 
     return {"nodes": nodes}
 
 
 def main():
     """CLI entry point for header_to_cdd_ir.py."""
-    parser = argparse.ArgumentParser(description="Extract cdd-c FFI IR JSON from C89 headers.")
+    parser = argparse.ArgumentParser(
+        description="Extract cdd-c FFI IR JSON from C89 headers."
+    )
     parser.add_argument("-i", "--input", required=True, help="Umbrella C header path")
-    parser.add_argument("-I", "--include-dir", required=True, help="Header include directory")
-    parser.add_argument("-o", "--output", required=True, help="Output IR JSON file path")
+    parser.add_argument(
+        "-I", "--include-dir", required=True, help="Header include directory"
+    )
+    parser.add_argument(
+        "-o", "--output", required=True, help="Output IR JSON file path"
+    )
     args = parser.parse_args()
 
     ir = extract_ir(args.input, args.include_dir)
