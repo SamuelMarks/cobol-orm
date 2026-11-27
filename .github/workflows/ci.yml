@@ -1,0 +1,73 @@
+name: cobol-orm CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-verify:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install toolchain (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build gcc clang gnucobol cppcheck doxygen gcovr clang-format python3-clang libclang-dev valgrind
+
+      - name: Install toolchain (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install cmake gnucobol cppcheck doxygen gcovr clang-format
+          python3 -m pip install --user libclang
+
+      - name: Configure & Build (Strict C89 + GnuCOBOL Free/Fixed/IBM/MF/10-Eras/Examples)
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake --build build --parallel 4
+          ctest --test-dir build --output-on-failure
+
+      - name: Shared Library Build Verification (BUILD_SHARED_LIBS=ON)
+        run: |
+          cmake -S . -B build-shared -DBUILD_SHARED_LIBS=ON
+          cmake --build build-shared --parallel 4
+          ctest --test-dir build-shared --output-on-failure
+
+      - name: Static Analysis, Format & 100% Doc Coverage Gates
+        run: |
+          clang-format --dry-run --Werror include/*.h src/*.h src/cobol_orm_*.c tests/c/*.c
+          cppcheck --enable=warning,style,performance,portability --std=c89 --error-exitcode=1 --inline-suppr --suppress=missingIncludeSystem --suppress=unusedFunction -I include -I src include src/cobol_orm_*.c
+          python3 scripts/generate_undercovered.py --doc
+          python3 scripts/check_enum_returns_clang.py include src -p build
+          python3 scripts/check_no_discard_void_clang.py include src -p build
+          python3 scripts/free_to_fixed80.py --verify generated/fixed copybooks/fixed cobol/fixed copybooks/era cobol/era/cobol60 cobol/era/cobol61 cobol/era/cobol61x cobol/era/cobol65 cobol/era/cobol68 cobol/era/cobol74 cobol/era/cobol85 cobol/era/cobol2002 tests/cobol/test_e2e_fixed.cbl examples/fixed
+
+      - name: 100% Function/Line/Branch Coverage Gate (C89 + COBOL Free/Fixed)
+        run: |
+          cmake -S . -B build-cov -DCOBOL_ORM_ENABLE_COVERAGE=ON
+          cmake --build build-cov --parallel 4 --target test_cobol_orm_c
+          ctest --test-dir build-cov -R c89_unit_and_oom_suite --output-on-failure
+          if [ "${{ runner.os }}" = "macOS" ]; then
+            gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
+          else
+            gcovr -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
+          fi
+          python3 scripts/check_cobol_coverage.py --build-dir build
+
+      - name: ASan + UBSan Clean Verification
+        run: |
+          cmake -S . -B build-asan -DCOBOL_ORM_ENABLE_ASAN=ON
+          cmake --build build-asan --parallel 4 --target test_cobol_orm_c
+          ctest --test-dir build-asan -R c89_unit_and_oom_suite --output-on-failure
+
+      - name: Valgrind Clean Verification (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 build/test_cobol_orm_c

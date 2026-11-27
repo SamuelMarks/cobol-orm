@@ -1,0 +1,6748 @@
+{
+  "nodes": [
+    {
+      "kind": 5,
+      "name": "COBOL_ORM_DECIMAL_MAX_DIGITS",
+      "doc": "Maximum decimal digits in cobol_orm_decimal_t.",
+      "inferred_type": 1,
+      "evaluated_value": "38",
+      "variants": [
+        {
+          "name": "COBOL_ORM_DECIMAL_MAX_DIGITS",
+          "value": "38"
+        }
+      ]
+    },
+    {
+      "kind": 5,
+      "name": "COBOL_ORM_COMMAREA_DATA_CAP",
+      "doc": "Fixed COMMAREA string buffer capacity.",
+      "inferred_type": 1,
+      "evaluated_value": "256",
+      "variants": [
+        {
+          "name": "COBOL_ORM_COMMAREA_DATA_CAP",
+          "value": "256"
+        }
+      ]
+    },
+    {
+      "kind": 5,
+      "name": "COBOL_ORM_DISPLAY_COMMAREA_SIZE",
+      "doc": "Fixed USAGE DISPLAY COMMAREA byte length.",
+      "inferred_type": 1,
+      "evaluated_value": "552",
+      "variants": [
+        {
+          "name": "COBOL_ORM_DISPLAY_COMMAREA_SIZE",
+          "value": "552"
+        }
+      ]
+    },
+    {
+      "kind": 5,
+      "name": "COBOL_ORM_LEGACY_MAX_HANDLES",
+      "doc": "Maximum concurrent legacy handle slots.",
+      "inferred_type": 1,
+      "evaluated_value": "64",
+      "variants": [
+        {
+          "name": "COBOL_ORM_LEGACY_MAX_HANDLES",
+          "value": "64"
+        }
+      ]
+    },
+    {
+      "kind": 5,
+      "name": "COBOL_ORM_VERSION_STR",
+      "doc": "Library semantic version string.",
+      "inferred_type": 3,
+      "evaluated_value": "\"0.1.0\"",
+      "variants": [
+        {
+          "name": "COBOL_ORM_VERSION_STR",
+          "value": "\"0.1.0\""
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_error",
+      "doc": "@brief Unified error status codes returned by every cobol-orm function.\nValues 0..31 match `c_orm_error_t` 1:1 for lossless error percolation across\nthe C89 and COBOL FFI boundary. Values 32..36 represent COBOL FFI facade and\nlegacy integer-handle / COMMAREA dispatch errors.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_OK",
+          "value": "0",
+          "doc": "@brief Operation succeeded.",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_MEMORY",
+          "value": "1",
+          "doc": "@brief Out of memory / allocation failure.",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_CONNECTION",
+          "value": "2",
+          "doc": "@brief Database connection failure.",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_SQL",
+          "value": "3",
+          "doc": "@brief SQL syntax or execution error.",
+          "raw_spelling": "3"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_BIND",
+          "value": "4",
+          "doc": "@brief Statement parameter bind failure.",
+          "raw_spelling": "4"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_STEP",
+          "value": "5",
+          "doc": "@brief Statement step execution failure.",
+          "raw_spelling": "5"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_TYPE_MISMATCH",
+          "value": "6",
+          "doc": "@brief Column or value type mismatch.",
+          "raw_spelling": "6"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_NOT_FOUND",
+          "value": "7",
+          "doc": "@brief Requested row, column, or handle not found.",
+          "raw_spelling": "7"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_NOT_IMPLEMENTED",
+          "value": "8",
+          "doc": "@brief Feature or driver capability not implemented.",
+          "raw_spelling": "8"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_UNKNOWN",
+          "value": "9",
+          "doc": "@brief Unclassified internal error.",
+          "raw_spelling": "9"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_EXPIRED",
+          "value": "10",
+          "doc": "@brief Session or identity-map record expired.",
+          "raw_spelling": "10"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_VALIDATION",
+          "value": "11",
+          "doc": "@brief Invalid argument or domain/level-88 validation failure.",
+          "raw_spelling": "11"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_RECURSION",
+          "value": "12",
+          "doc": "@brief Cyclic recursion limit exceeded.",
+          "raw_spelling": "12"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_READ_ONLY",
+          "value": "13",
+          "doc": "@brief Write attempted on read-only database or resource.",
+          "raw_spelling": "13"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_NULL_POINTER",
+          "value": "14",
+          "doc": "@brief Required pointer argument was NULL.",
+          "raw_spelling": "14"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_IO",
+          "value": "15",
+          "doc": "@brief File or stream I/O failure.",
+          "raw_spelling": "15"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_PARSE",
+          "value": "16",
+          "doc": "@brief Input or SQL parse failure.",
+          "raw_spelling": "16"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_OVERFLOW",
+          "value": "17",
+          "doc": "@brief Buffer or integer capacity overflow.",
+          "raw_spelling": "17"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_CYCLE",
+          "value": "18",
+          "doc": "@brief Dependency cycle detected.",
+          "raw_spelling": "18"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_BUSY",
+          "value": "19",
+          "doc": "@brief Database or synchronization lock busy.",
+          "raw_spelling": "19"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_CRYPTO",
+          "value": "20",
+          "doc": "@brief Cryptographic hook failure.",
+          "raw_spelling": "20"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_CONSTRAINT",
+          "value": "21",
+          "doc": "@brief Unique, foreign-key, or CHECK constraint violation.",
+          "raw_spelling": "21"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_DRIVER_LOAD",
+          "value": "22",
+          "doc": "@brief Dynamic database client library failed to load.",
+          "raw_spelling": "22"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_ODBC_DIAG",
+          "value": "23",
+          "doc": "@brief Underlying ODBC or IBM Db2 CLI diagnostic error.",
+          "raw_spelling": "23"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_TIMEOUT",
+          "value": "24",
+          "doc": "@brief Login, pool acquisition, or query timeout.",
+          "raw_spelling": "24"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_DEADLOCK",
+          "value": "25",
+          "doc": "@brief Serialization failure or deadlock victim.",
+          "raw_spelling": "25"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_TRUNCATION",
+          "value": "26",
+          "doc": "@brief Disallowed string, binary, or fractional truncation.",
+          "raw_spelling": "26"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_DECIMAL_SYNTAX",
+          "value": "27",
+          "doc": "@brief Malformed decimal string or invalid BCD/COMP-3 sign nybble.",
+          "raw_spelling": "27"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_DECIMAL_OVERFLOW",
+          "value": "28",
+          "doc": "@brief Decimal precision exceeded or division by zero.",
+          "raw_spelling": "28"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_DECIMAL_INEXACT",
+          "value": "29",
+          "doc": "@brief Non-zero digits lost under exact rounding mode.",
+          "raw_spelling": "29"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_CODEPAGE",
+          "value": "30",
+          "doc": "@brief Unmappable character or malformed UTF/EBCDIC sequence.",
+          "raw_spelling": "30"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_COPYBOOK_SYNTAX",
+          "value": "31",
+          "doc": "@brief COBOL Copybook (.cpy) lexer or parser syntax error.",
+          "raw_spelling": "31"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_INVALID_HANDLE",
+          "value": "32",
+          "doc": "@brief Opaque handle is invalid, corrupted, or already closed.",
+          "raw_spelling": "32"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_BUFFER_TOO_SMALL",
+          "value": "33",
+          "doc": "@brief Caller-provided output buffer capacity is insufficient.",
+          "raw_spelling": "33"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_NOT_CONNECTED",
+          "value": "34",
+          "doc": "@brief Operation requires an active database connection.",
+          "raw_spelling": "34"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_HANDLE_TABLE_FULL",
+          "value": "35",
+          "doc": "@brief Legacy integer handle registry has no free slots available.",
+          "raw_spelling": "35"
+        },
+        {
+          "name": "COBOL_ORM_ERROR_INVALID_OPCODE",
+          "value": "36",
+          "doc": "@brief Unsupported legacy COMMAREA dispatch opcode.",
+          "raw_spelling": "36"
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_db",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_stmt",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_pool",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_ast",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_cpy",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_rs",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_mig",
+      "doc": null,
+      "fields": []
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_dialect",
+      "doc": "@brief SQL dialect identifiers for query and DDL generation.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_DIALECT_SQLITE",
+          "value": "0",
+          "doc": "@brief SQLite dialect (`?` placeholders, `LIMIT`/`OFFSET`).",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_DIALECT_POSTGRES",
+          "value": "1",
+          "doc": "@brief PostgreSQL dialect (`$1..$N` placeholders).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_DIALECT_MYSQL",
+          "value": "2",
+          "doc": "@brief MySQL / MariaDB dialect.",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_DIALECT_DB2",
+          "value": "3",
+          "doc": "@brief IBM Db2 dialect (`FETCH FIRST`, `MERGE INTO`, `WITH UR/CS/RS/RR`).",
+          "raw_spelling": "3"
+        },
+        {
+          "name": "COBOL_ORM_DIALECT_ODBC",
+          "value": "4",
+          "doc": "@brief Generic ANSI / ODBC 3.52 dialect.",
+          "raw_spelling": "4"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_round_mode",
+      "doc": "@brief Rounding modes for lossless 38-digit fixed-point decimal operations.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_ROUND_TRUNCATE",
+          "value": "0",
+          "doc": "@brief Truncate toward zero (standard COBOL default).",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_ROUND_HALF_UP",
+          "value": "1",
+          "doc": "@brief Round half away from zero (COBOL `ROUNDED`).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_ROUND_HALF_EVEN",
+          "value": "2",
+          "doc": "@brief Round half to even (IBM Db2 Banker's rounding).",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_ROUND_ERROR_IF_INEXACT",
+          "value": "3",
+          "doc": "@brief Reject any non-zero discarded digits with `DECIMAL_INEXACT`.",
+          "raw_spelling": "3"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_codepage",
+      "doc": "@brief Character codepages and IBM CCSIDs for EBCDIC / mainframe interop.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_CP_UTF8",
+          "value": "0",
+          "doc": "@brief UTF-8 (CCSID 1208).",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_CP_ASCII",
+          "value": "1",
+          "doc": "@brief 7-bit ASCII / ISO-8859-1 (CCSID 367/819).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_CP_IBM037",
+          "value": "2",
+          "doc": "@brief US/Canada z/OS MVS & Db2 EBCDIC (CCSID 37).",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_CP_IBM1047",
+          "value": "3",
+          "doc": "@brief z/OS USS C/COBOL EBCDIC (CCSID 1047).",
+          "raw_spelling": "3"
+        },
+        {
+          "name": "COBOL_ORM_CP_IBM500",
+          "value": "4",
+          "doc": "@brief International EBCDIC (CCSID 500).",
+          "raw_spelling": "4"
+        },
+        {
+          "name": "COBOL_ORM_CP_IBM1140",
+          "value": "5",
+          "doc": "@brief US/Canada EBCDIC with Euro U+20AC (CCSID 1140).",
+          "raw_spelling": "5"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_cpy_format",
+      "doc": "@brief COBOL Copybook source column layout format.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_CPY_FORMAT_AUTO",
+          "value": "0",
+          "doc": "@brief Automatically detect fixed vs. free format.",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_CPY_FORMAT_FIXED",
+          "value": "1",
+          "doc": "@brief Strict 80-column fixed format (cols 7-72).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_CPY_FORMAT_FREE",
+          "value": "2",
+          "doc": "@brief Modern COBOL free format.",
+          "raw_spelling": "2"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_isolation",
+      "doc": "@brief Transaction isolation levels for IBM Db2 and Generic ODBC.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_ISO_UR",
+          "value": "0",
+          "doc": "@brief Uncommitted Read (`WITH UR`).",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_ISO_CS",
+          "value": "1",
+          "doc": "@brief Cursor Stability (`WITH CS`).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_ISO_RS",
+          "value": "2",
+          "doc": "@brief Read Stability (`WITH RS`).",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_ISO_RR",
+          "value": "3",
+          "doc": "@brief Repeatable Read (`WITH RR`).",
+          "raw_spelling": "3"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_variant_type",
+      "doc": "@brief Dynamic variant column value discriminants in abstract result sets.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_VAL_NULL",
+          "value": "0",
+          "doc": "@brief SQL NULL value.",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_VAL_INT",
+          "value": "1",
+          "doc": "@brief 64-bit signed integer value.",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_VAL_FLOAT",
+          "value": "2",
+          "doc": "@brief 64-bit IEEE double floating-point value.",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_VAL_STRING",
+          "value": "3",
+          "doc": "@brief UTF-8 character string value.",
+          "raw_spelling": "3"
+        },
+        {
+          "name": "COBOL_ORM_VAL_BLOB",
+          "value": "4",
+          "doc": "@brief Raw binary BLOB value.",
+          "raw_spelling": "4"
+        },
+        {
+          "name": "COBOL_ORM_VAL_DECIMAL",
+          "value": "5",
+          "doc": "@brief Exact 38-digit fixed-point decimal value.",
+          "raw_spelling": "5"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_join_type",
+      "doc": "@brief SQL JOIN kinds supported by the fluent AST query builder.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_JOIN_INNER",
+          "value": "0",
+          "doc": "@brief INNER JOIN.",
+          "raw_spelling": "0"
+        },
+        {
+          "name": "COBOL_ORM_JOIN_LEFT",
+          "value": "1",
+          "doc": "@brief LEFT OUTER JOIN.",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_JOIN_RIGHT",
+          "value": "2",
+          "doc": "@brief RIGHT OUTER JOIN.",
+          "raw_spelling": "2"
+        }
+      ]
+    },
+    {
+      "kind": 2,
+      "name": "cobol_orm_legacy_op",
+      "doc": "@brief Legacy integer-handle COMMAREA dispatcher opcodes for COBOL-60\nthrough COBOL-85 programs lacking `USAGE POINTER` or `BY VALUE`.",
+      "variants": [
+        {
+          "name": "COBOL_ORM_OP_CONNECT",
+          "value": "1",
+          "doc": "@brief Connect database (`data1` = URL, returns `db_id`).",
+          "raw_spelling": "1"
+        },
+        {
+          "name": "COBOL_ORM_OP_DISCONNECT",
+          "value": "2",
+          "doc": "@brief Disconnect database (`db_id`).",
+          "raw_spelling": "2"
+        },
+        {
+          "name": "COBOL_ORM_OP_EXEC_SQL",
+          "value": "3",
+          "doc": "@brief Execute raw SQL DDL/DML (`db_id`, `data1` = SQL).",
+          "raw_spelling": "3"
+        },
+        {
+          "name": "COBOL_ORM_OP_TX_BEGIN",
+          "value": "4",
+          "doc": "@brief Begin transaction (`db_id`).",
+          "raw_spelling": "4"
+        },
+        {
+          "name": "COBOL_ORM_OP_TX_COMMIT",
+          "value": "5",
+          "doc": "@brief Commit transaction (`db_id`).",
+          "raw_spelling": "5"
+        },
+        {
+          "name": "COBOL_ORM_OP_TX_ROLLBACK",
+          "value": "6",
+          "doc": "@brief Rollback transaction (`db_id`).",
+          "raw_spelling": "6"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_PREPARE",
+          "value": "7",
+          "doc": "@brief Prepare SQL statement (`db_id`, `data1` = SQL, returns `stmt_id`).",
+          "raw_spelling": "7"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_BIND_I32",
+          "value": "8",
+          "doc": "@brief Bind 32-bit integer parameter (`stmt_id`, `param_idx`, `val_i32`).",
+          "raw_spelling": "8"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_BIND_STR",
+          "value": "9",
+          "doc": "@brief Bind text parameter (`stmt_id`, `param_idx`, `data1`).",
+          "raw_spelling": "9"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_STEP",
+          "value": "10",
+          "doc": "@brief Step prepared statement (`stmt_id`, returns `val_i32` = has_row).",
+          "raw_spelling": "10"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_COL_I32",
+          "value": "11",
+          "doc": "@brief Read 32-bit int column (`stmt_id`, `param_idx`, returns `val_i32`).",
+          "raw_spelling": "11"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_COL_STR",
+          "value": "12",
+          "doc": "@brief Read text column (`stmt_id`, `param_idx`, returns `data2`).",
+          "raw_spelling": "12"
+        },
+        {
+          "name": "COBOL_ORM_OP_STMT_FINALIZE",
+          "value": "13",
+          "doc": "@brief Finalize prepared statement (`stmt_id`).",
+          "raw_spelling": "13"
+        },
+        {
+          "name": "COBOL_ORM_OP_LAST_ERROR",
+          "value": "14",
+          "doc": "@brief Retrieve last error text (`db_id`, returns `data2`).",
+          "raw_spelling": "14"
+        },
+        {
+          "name": "COBOL_ORM_OP_VERSION",
+          "value": "15",
+          "doc": "@brief Retrieve library version string (returns `data2`).",
+          "raw_spelling": "15"
+        },
+        {
+          "name": "COBOL_ORM_OP_LAST_ROWID",
+          "value": "16",
+          "doc": "@brief Retrieve last insert rowid (`db_id`, returns `val_i32`).",
+          "raw_spelling": "16"
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_decimal",
+      "doc": "@brief ABI-identical stack-allocated exact 38-digit fixed-point decimal.\nMatches `c_orm_decimal_t` byte-for-byte (`41` bytes, alignment `1`).",
+      "fields": [
+        {
+          "name": "sign",
+          "doc": "@brief 0 for non-negative, 1 for negative.",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "precision",
+          "doc": "@brief Active total digits (`1..38`).",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "scale",
+          "doc": "@brief Fractional digits after decimal point (`0..38`).",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "digits",
+          "doc": "@brief Little-endian base-10 digits (`0..9`), `digits[0]` is `10^-scale`.",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 38
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_pool_stats",
+      "doc": "@brief Connection pool telemetry snapshot with explicit fixed-width fields.",
+      "fields": [
+        {
+          "name": "active_connections",
+          "doc": "@brief Currently leased active connections.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "idle_connections",
+          "doc": "@brief Currently available idle connections.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "exhaustion_count",
+          "doc": "@brief Total pool exhaustion / timeout events recorded.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "slow_queries_logged",
+          "doc": "@brief Total slow queries logged across pooled sessions.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "average_wait_time_ms",
+          "doc": "@brief Average acquisition wait latency in milliseconds.",
+          "type": {
+            "kind": 11,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_cpy_info",
+      "doc": "@brief Summary metadata for a parsed COBOL Copybook `01` record.",
+      "fields": [
+        {
+          "name": "total_byte_size",
+          "doc": "@brief Total static wire byte length of the `01` record.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "field_count",
+          "doc": "@brief Number of flattened elementary/SQL-mapped fields.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "has_dclgen",
+          "doc": "@brief Non-zero if an `EXEC SQL DECLARE` DCLGEN block was parsed.",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_col_info",
+      "doc": "@brief Metadata descriptor for a single field within a parsed Copybook.",
+      "fields": [
+        {
+          "name": "byte_offset",
+          "doc": "@brief 0-based byte offset inside the COBOL `01` wire record.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "byte_size",
+          "doc": "@brief Total wire byte length of the field.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "usage",
+          "doc": "@brief COBOL `USAGE` kind (0=DISPLAY, 1=COMP, 2=COMP-5, 5=COMP-3).",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "total_digits",
+          "doc": "@brief Total numeric precision digits (`0` for alphanumeric).",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "frac_digits",
+          "doc": "@brief Fractional digits after implied `V` (`0` for integer/alpha).",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "is_signed",
+          "doc": "@brief Non-zero if numeric field is signed (`PIC S9`).",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "is_pk",
+          "doc": "@brief Non-zero if field is marked as primary key.",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 0,
+      "name": "cobol_orm_commarea",
+      "doc": "@brief Fixed-width communication area (`COMMAREA`) for legacy COBOL-60\nthrough COBOL-85 callers invoking ORM operations via a single `BY REFERENCE`\nblock using integer handle IDs and space-padded `PIC X` payloads.",
+      "fields": [
+        {
+          "name": "opcode",
+          "doc": "@brief Operation code (`cobol_orm_legacy_op_t`).",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "status",
+          "doc": "@brief Output status code (`cobol_orm_error_t`).",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "db_id",
+          "doc": "@brief Integer database handle slot ID (`1..64`, or `0`).",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "stmt_id",
+          "doc": "@brief Integer statement handle slot ID (`1..64`, or `0`).",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "param_idx",
+          "doc": "@brief 1-based parameter or 0-based column index.",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "val_i32",
+          "doc": "@brief Input or output 32-bit signed integer value / boolean flag.",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "data1_len",
+          "doc": "@brief Length of active data in `data1` (0 to auto-trim spaces).",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "data2_len",
+          "doc": "@brief Output byte length written to `data2`.",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "data1",
+          "doc": "@brief Space-padded input string buffer (URL, SQL, bind text).",
+          "type": {
+            "kind": 2,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 256
+          },
+          "intent": 0
+        },
+        {
+          "name": "data2",
+          "doc": "@brief Space-padded output string buffer (column text, error, version).",
+          "type": {
+            "kind": 2,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 256
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_error_name",
+      "doc": "@brief Resolves a `cobol_orm_error_t` code to its canonical uppercase name\ninto a COBOL `PIC X` space-padded buffer.\n@param[in] err Error status code to describe.\n@param[out] out_buf Caller-allocated character buffer receiving space-padded\nname.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length of the error name.\n@return `COBOL_ORM_OK` on success, `COBOL_ORM_ERROR_NULL_POINTER` if\n`out_buf` or `out_len` is NULL, or `COBOL_ORM_ERROR_TRUNCATION` if `buf_cap`\nis smaller than the name length.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "err",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_connect",
+      "doc": "@brief Connects to any supported database backend (`sqlite://`, `memory://`,\n`odbc://`, `db2://`, `postgres://`, `mysql://`) via a COBOL `PIC X` URL.\n@param[in] url Space-padded or NUL-terminated connection URL buffer.\n@param[in] url_len Length of `url` buffer in bytes.\n@param[out] out_db Receives the strongly-typed database handle on success.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "url",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "url_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_disconnect",
+      "doc": "@brief Disconnects and frees a database connection handle.\n@param[in] db Database handle previously returned by `cobol_orm_connect`.\n@return `COBOL_ORM_OK` on success, or `COBOL_ORM_ERROR_INVALID_HANDLE`.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_exec_sql",
+      "doc": "@brief Executes a raw SQL DDL or DML statement returning no result rows.\n@param[in] db Active database connection handle.\n@param[in] sql Space-padded SQL text buffer (supports arbitrary length).\n@param[in] sql_len Length of `sql` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_last_error",
+      "doc": "@brief Copies the driver's last error message into a COBOL `PIC X` buffer.\n@param[in] db Active database connection handle.\n@param[out] out_buf Destination buffer space-padded to `buf_cap`.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length of message.\n@return `COBOL_ORM_OK` on success, or error code on truncation/failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_last_trace",
+      "doc": "@brief Copies the contextual error trace stack into a COBOL `PIC X` buffer.\n@param[in] db Active database connection handle.\n@param[out] out_buf Destination buffer space-padded to `buf_cap`.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length of trace.\n@return `COBOL_ORM_OK` on success, or error code on truncation/failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_last_insert_rowid",
+      "doc": "@brief Retrieves the 64-bit row ID generated by the most recent `INSERT`.\n@param[in] db Active database connection handle.\n@param[out] out_rowid Receives the 64-bit last insert row ID.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_rowid",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_enable_stmt_cache",
+      "doc": "@brief Enables or disables the per-connection prepared-statement LRU cache.\n@param[in] db Active database connection handle.\n@param[in] capacity Maximum cached statements (`0` disables caching).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "capacity",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_set_timezone",
+      "doc": "@brief Configures the session UTC timezone offset and optional IANA name.\n@param[in] db Active database connection handle.\n@param[in] offset_minutes Offset from UTC in minutes.\n@param[in] tz_name Optional timezone name buffer (may be NULL if\n`tz_len==0`).\n@param[in] tz_len Length of `tz_name` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "offset_minutes",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "tz_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "tz_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_set_slow_query_ms",
+      "doc": "@brief Configures the slow-query telemetry logging threshold in milliseconds.\n@param[in] db Active database connection handle.\n@param[in] threshold_ms Milliseconds threshold (`0` disables slow-query log).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "threshold_ms",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_version",
+      "doc": "@brief Writes the `cobol-orm` semantic version string into a `PIC X` buffer.\n@param[out] out_buf Destination space-padded buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length of version string.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_pool_init",
+      "doc": "@brief Initializes a bounded thread-safe database connection pool.\n@param[in] url Connection URL buffer.\n@param[in] url_len Length of `url` buffer in bytes.\n@param[in] min_conns Minimum pre-warmed connections.\n@param[in] max_conns Maximum pool connections.\n@param[in] timeout_ms Acquisition wait timeout in milliseconds.\n@param[out] out_pool Receives initialized connection pool handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "url",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "url_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "min_conns",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "max_conns",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "timeout_ms",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_pool",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_pool",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_pool_acquire",
+      "doc": "@brief Leases a database connection handle from a connection pool.\n@param[in] pool Connection pool handle.\n@param[out] out_db Receives leased database handle.\n@return `COBOL_ORM_OK` on success, `COBOL_ORM_ERROR_TIMEOUT` if exhausted, or\nother error code.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "pool",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_pool",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_pool_release",
+      "doc": "@brief Returns a previously leased database connection back to the pool.\n@param[in] pool Connection pool handle.\n@param[in] db Database handle acquired via `cobol_orm_pool_acquire`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "pool",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_pool",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_pool_telemetry",
+      "doc": "@brief Snapshots live pool utilization and wait telemetry metrics.\n@param[in] pool Connection pool handle.\n@param[out] out_stats Receives populated `cobol_orm_pool_stats_t`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "pool",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_pool",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_stats",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_pool_stats",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_pool_destroy",
+      "doc": "@brief Destroys a connection pool and closes all pooled sessions.\n@param[in] pool Connection pool handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "pool",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_pool",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_begin",
+      "doc": "@brief Begins an explicit database transaction.\n@param[in] db Active database connection handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_commit",
+      "doc": "@brief Commits the active database transaction.\n@param[in] db Active database connection handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_rollback",
+      "doc": "@brief Rolls back the active database transaction.\n@param[in] db Active database connection handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_savepoint",
+      "doc": "@brief Creates a named savepoint inside an active transaction.\n@param[in] db Active database connection handle.\n@param[in] name Savepoint identifier buffer.\n@param[in] name_len Length of `name` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_release_sp",
+      "doc": "@brief Releases a named savepoint.\n@param[in] db Active database connection handle.\n@param[in] name Savepoint identifier buffer.\n@param[in] name_len Length of `name` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_tx_rollback_sp",
+      "doc": "@brief Rolls back work performed after a named savepoint.\n@param[in] db Active database connection handle.\n@param[in] name Savepoint identifier buffer.\n@param[in] name_len Length of `name` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_prepare",
+      "doc": "@brief Prepares a parameterized SQL statement on `db`.\n@param[in] db Active database connection handle.\n@param[in] sql SQL statement buffer.\n@param[in] sql_len Length of `sql` buffer in bytes.\n@param[out] out_stmt Receives prepared statement handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_prepare_cached",
+      "doc": "@brief Prepares a parameterized SQL statement using the session LRU cache.\n@param[in] db Active database connection handle.\n@param[in] sql SQL statement buffer.\n@param[in] sql_len Length of `sql` buffer in bytes.\n@param[out] out_stmt Receives cached prepared statement handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_i32",
+      "doc": "@brief Binds a 32-bit signed integer parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] val Signed 32-bit integer value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_i64",
+      "doc": "@brief Binds a 64-bit signed integer parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] val Signed 64-bit integer value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_f64",
+      "doc": "@brief Binds a 64-bit IEEE double floating-point parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] val Double-precision value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 11,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_str",
+      "doc": "@brief Binds a space-trimmed COBOL `PIC X` text parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] val Source `PIC X` buffer.\n@param[in] val_len Length of `val` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "val_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_blob",
+      "doc": "@brief Binds a raw binary BLOB parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] data Binary byte buffer.\n@param[in] data_len Number of bytes in `data`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "data",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "data_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_decimal",
+      "doc": "@brief Binds an exact 38-digit fixed-point decimal parameter (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] dec Exact fixed-point decimal value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dec",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_comp3",
+      "doc": "@brief Binds a native COBOL `COMP-3` (packed decimal) buffer directly as an\nexact fixed-point SQL parameter.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@param[in] comp3 Raw COBOL `COMP-3` byte buffer.\n@param[in] byte_len Length of `comp3` in bytes (`1..20`).\n@param[in] frac_digits Implied fractional digits after `V` (`0..38`).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "comp3",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "byte_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_bind_null",
+      "doc": "@brief Binds SQL `NULL` to a parameter position (1-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 1-based parameter index.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_step",
+      "doc": "@brief Advances execution of a prepared statement by one row.\n@param[in] stmt Prepared statement handle.\n@param[out] out_has_row Set to `1` if a result row is available, else `0`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_has_row",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_reset",
+      "doc": "@brief Resets a prepared statement for re-binding and re-execution.\n@param[in] stmt Prepared statement handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_finalize",
+      "doc": "@brief Finalizes a statement (or returns it to cache) and frees its handle.\n@param[in] stmt Prepared statement handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_count",
+      "doc": "@brief Retrieves the number of columns in the current statement result set.\n@param[in] stmt Prepared statement handle.\n@param[out] out_count Receives column count.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_count",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_name",
+      "doc": "@brief Retrieves a result column's name (0-based index) into `PIC X`.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_buf Destination space-padded character buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_is_null",
+      "doc": "@brief Checks whether a result column (0-based index) is SQL `NULL`.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_is_null Set to `1` if NULL, `0` otherwise.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_is_null",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_i32",
+      "doc": "@brief Reads a 32-bit signed integer column value (0-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_val Receives 32-bit integer value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_i64",
+      "doc": "@brief Reads a 64-bit signed integer column value (0-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_val Receives 64-bit integer value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_f64",
+      "doc": "@brief Reads a 64-bit IEEE double column value (0-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_val Receives double value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 11,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_str",
+      "doc": "@brief Reads a text column value (0-based index) into a `PIC X` buffer.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_buf Destination space-padded buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length.\n@return `COBOL_ORM_OK` on success, or error code on truncation/failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_blob",
+      "doc": "@brief Reads a raw BLOB column value (0-based index) into a byte buffer.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_buf Destination byte buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives actual BLOB byte length.\n@return `COBOL_ORM_OK` on success, or error code on truncation/failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_decimal",
+      "doc": "@brief Reads an exact 38-digit fixed-point decimal column (0-based index).\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[out] out_dec Receives exact decimal value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_dec",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_stmt_col_comp3",
+      "doc": "@brief Reads a decimal SQL column directly into a COBOL `COMP-3` buffer.\n@param[in] stmt Prepared statement handle.\n@param[in] idx 0-based column index.\n@param[in] int_digits Integer digits before implied `V`.\n@param[in] frac_digits Fractional digits after implied `V`.\n@param[in] is_signed Non-zero for `PIC S9`, 0 for unsigned `PIC 9`.\n@param[in] round_mode Rounding mode if rescaling is required.\n@param[out] out_comp3 Destination `COMP-3` byte buffer.\n@param[in] buf_cap Capacity of `out_comp3` in bytes.\n@param[out] out_written Receives bytes written to `out_comp3`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "stmt",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_stmt",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "idx",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "int_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_signed",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "round_mode",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_comp3",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_written",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_query_abstract",
+      "doc": "@brief Executes a SQL query and hydrates all rows into a dynamic result set.\n@param[in] db Active database connection handle.\n@param[in] sql SQL query text buffer.\n@param[in] sql_len Length of `sql` buffer in bytes.\n@param[out] out_rs Receives allocated result set handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_row_count",
+      "doc": "@brief Retrieves total hydrated row count in a dynamic result set.\n@param[in] rs Result set handle.\n@param[out] out_count Receives number of rows.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_count",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_col_count",
+      "doc": "@brief Retrieves column count for a specific row in a dynamic result set.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[out] out_count Receives number of columns in `row_idx`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_count",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_col_name",
+      "doc": "@brief Retrieves a column name by 0-based index in a dynamic result set.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[in] col_idx 0-based column index.\n@param[out] out_buf Destination space-padded buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_get_type",
+      "doc": "@brief Retrieves the variant type of a named column in a dynamic result set.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[in] col_name Column name buffer.\n@param[in] name_len Length of `col_name` buffer in bytes.\n@param[out] out_type Receives `cobol_orm_variant_type_t`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_type",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_get_i64",
+      "doc": "@brief Retrieves a 64-bit integer value by column name from a result set.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[in] col_name Column name buffer.\n@param[in] name_len Length of `col_name` buffer in bytes.\n@param[out] out_val Receives 64-bit integer value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_get_f64",
+      "doc": "@brief Retrieves a 64-bit double value by column name from a result set.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[in] col_name Column name buffer.\n@param[in] name_len Length of `col_name` buffer in bytes.\n@param[out] out_val Receives double value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 11,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_get_str",
+      "doc": "@brief Retrieves a text value by column name into a `PIC X` buffer.\n@param[in] rs Result set handle.\n@param[in] row_idx 0-based row index.\n@param[in] col_name Column name buffer.\n@param[in] name_len Length of `col_name` buffer in bytes.\n@param[out] out_buf Destination space-padded buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "row_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_rs_free",
+      "doc": "@brief Frees a dynamic result set handle and all hydrated row memory.\n@param[in] rs Result set handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "rs",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_rs",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_new",
+      "doc": "@brief Creates a new fluent SQL AST query builder handle.\n@param[out] out_ast Receives allocated AST builder handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "out_ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_select",
+      "doc": "@brief Sets the `SELECT` projection columns on an AST query.\n@param[in] ast AST query handle.\n@param[in] cols Comma-separated column projection string.\n@param[in] cols_len Length of `cols` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cols",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "cols_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_distinct",
+      "doc": "@brief Enables `SELECT DISTINCT` on an AST query.\n@param[in] ast AST query handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_from",
+      "doc": "@brief Sets the `FROM` target table on an AST query.\n@param[in] ast AST query handle.\n@param[in] table Table name buffer.\n@param[in] table_len Length of `table` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "table",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "table_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_insert_into",
+      "doc": "@brief Configures the AST query as an `INSERT INTO <table>` statement.\n@param[in] ast AST query handle.\n@param[in] table Target table name buffer.\n@param[in] table_len Length of `table` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "table",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "table_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_update_table",
+      "doc": "@brief Configures the AST query as an `UPDATE <table>` statement.\n@param[in] ast AST query handle.\n@param[in] table Target table name buffer.\n@param[in] table_len Length of `table` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "table",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "table_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_delete_from",
+      "doc": "@brief Configures the AST query as a `DELETE FROM <table>` statement.\n@param[in] ast AST query handle.\n@param[in] table Target table name buffer.\n@param[in] table_len Length of `table` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "table",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "table_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_set_col",
+      "doc": "@brief Appends a column assignment (`SET col = val`) for `INSERT`/`UPDATE`.\n@param[in] ast AST query handle.\n@param[in] col Column name buffer.\n@param[in] col_len Length of `col` buffer in bytes.\n@param[in] val Literal value text buffer.\n@param[in] val_len Length of `val` buffer in bytes.\n@param[in] is_string Non-zero if value is a quoted string literal, 0 numeric.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "col_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "val_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_string",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_where_eq",
+      "doc": "@brief Appends a `WHERE` (or `AND WHERE`) equality predicate.\n@param[in] ast AST query handle.\n@param[in] col Column name buffer.\n@param[in] col_len Length of `col` buffer in bytes.\n@param[in] val Value literal text buffer.\n@param[in] val_len Length of `val` buffer in bytes.\n@param[in] is_string Non-zero for string literal, 0 for numeric literal.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "col_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "val",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "val_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_string",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_join",
+      "doc": "@brief Appends a `JOIN` clause to an AST query.\n@param[in] ast AST query handle.\n@param[in] join_type Join type (`INNER`, `LEFT`, `RIGHT`).\n@param[in] table Target join table name buffer.\n@param[in] table_len Length of `table` buffer in bytes.\n@param[in] on_sql Raw SQL join `ON` condition expression.\n@param[in] on_len Length of `on_sql` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "join_type",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "table",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "table_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "on_sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "on_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_group_by",
+      "doc": "@brief Appends a `GROUP BY` clause to an AST query.\n@param[in] ast AST query handle.\n@param[in] cols Comma-separated grouping column list.\n@param[in] cols_len Length of `cols` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cols",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "cols_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_order_by",
+      "doc": "@brief Appends an `ORDER BY` clause to an AST query.\n@param[in] ast AST query handle.\n@param[in] col Sort column expression buffer.\n@param[in] col_len Length of `col` buffer in bytes.\n@param[in] is_desc Non-zero for `DESC`, 0 for `ASC`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "col_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_desc",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_limit_offset",
+      "doc": "@brief Sets `LIMIT` and `OFFSET` pagination clauses on an AST query.\n@param[in] ast AST query handle.\n@param[in] limit Maximum rows (`0` omits `LIMIT`).\n@param[in] offset Rows to skip (`0` omits `OFFSET`).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "limit",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "offset",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_with_lock",
+      "doc": "@brief Adds an IBM Db2 isolation lock clause (`WITH UR/CS/RS/RR`) to AST.\n@param[in] ast AST query handle.\n@param[in] iso Isolation level (`UR`, `CS`, `RS`, `RR`).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "iso",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_to_sql",
+      "doc": "@brief Renders an AST query into dialect-specific parameterized SQL text.\n@param[in] ast AST query handle.\n@param[in] dialect Target SQL dialect (`SQLITE`, `POSTGRES`, `MYSQL`, `DB2`,\n`ODBC`).\n@param[out] out_sql Destination space-padded SQL buffer.\n@param[in] sql_cap Capacity of `out_sql` in bytes.\n@param[out] out_len Receives exact unpadded SQL byte length.\n@return `COBOL_ORM_OK` on success, or error code on truncation/failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dialect",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_exec",
+      "doc": "@brief Executes an AST `INSERT`/`UPDATE`/`DELETE` statement on `db`.\n@param[in] db Active database connection handle.\n@param[in] ast AST query handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ast_free",
+      "doc": "@brief Frees an AST query handle and its entire bump arena.\n@param[in] ast AST query handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "ast",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_ast",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_from_str",
+      "doc": "@brief Parses a base-10 decimal string into an exact `cobol_orm_decimal_t`.\n@param[in] str Decimal string buffer.\n@param[in] str_len Length of `str` buffer in bytes.\n@param[out] out_dec Receives parsed fixed-point decimal.\n@return `COBOL_ORM_OK` on success, or error code on syntax/overflow error.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "str",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "str_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_dec",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_to_str",
+      "doc": "@brief Formats an exact `cobol_orm_decimal_t` into a space-padded `PIC X`.\n@param[in] dec Source fixed-point decimal value.\n@param[out] out_buf Destination space-padded buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_len Receives exact unpadded byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "dec",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_add",
+      "doc": "@brief Computes exact fixed-point addition (`a + b`).\n@param[in] a Left addend.\n@param[in] b Right addend.\n@param[out] out_res Receives sum.\n@return `COBOL_ORM_OK` on success, or error code on overflow.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "a",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "b",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_res",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_sub",
+      "doc": "@brief Computes exact fixed-point subtraction (`a - b`).\n@param[in] a Minuend.\n@param[in] b Subtrahend.\n@param[out] out_res Receives difference.\n@return `COBOL_ORM_OK` on success, or error code on overflow.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "a",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "b",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_res",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_mul",
+      "doc": "@brief Computes fixed-point multiplication (`a * b`) with rounding.\n@param[in] a Multiplicand.\n@param[in] b Multiplier.\n@param[in] max_scale Maximum fractional scale to retain (`0..38`).\n@param[in] mode Rounding mode when scale is reduced.\n@param[out] out_res Receives product.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "a",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "b",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "max_scale",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "mode",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_res",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_div",
+      "doc": "@brief Computes fixed-point division (`a / b`) rounded to `result_scale`.\n@param[in] a Dividend.\n@param[in] b Divisor.\n@param[in] result_scale Desired quotient fractional scale (`0..38`).\n@param[in] mode Rounding mode applied to remainder.\n@param[out] out_res Receives quotient.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "a",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "b",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "result_scale",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "mode",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_res",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_cmp",
+      "doc": "@brief Compares two exact decimals numerically (`-1`, `0`, or `+1`).\n@param[in] a Left decimal.\n@param[in] b Right decimal.\n@param[out] out_cmp Receives `-1` if `a < b`, `0` if equal, `1` if `a > b`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "a",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "b",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_cmp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_to_comp3",
+      "doc": "@brief Packs a `cobol_orm_decimal_t` into a COBOL `COMP-3` byte buffer.\n@param[in] dec Source decimal value.\n@param[in] int_digits Integer digits before `V`.\n@param[in] frac_digits Fractional digits after `V`.\n@param[in] is_signed Non-zero for `PIC S9`, 0 for unsigned `PIC 9`.\n@param[out] out_buf Destination `COMP-3` buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_written Receives bytes written.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "dec",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "int_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_signed",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_written",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_from_comp3",
+      "doc": "@brief Unpacks a COBOL `COMP-3` byte buffer into a `cobol_orm_decimal_t`.\n@param[in] buf Source `COMP-3` bytes.\n@param[in] buf_len Length of `buf` in bytes (`1..20`).\n@param[in] frac_digits Implied fractional digits after `V`.\n@param[out] out_dec Receives unpacked decimal value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "buf_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_dec",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_to_zoned",
+      "doc": "@brief Packs a `cobol_orm_decimal_t` into COBOL Zoned Decimal (`DISPLAY`).\n@param[in] dec Source decimal value.\n@param[in] int_digits Integer digits before `V`.\n@param[in] frac_digits Fractional digits after `V`.\n@param[in] is_signed Non-zero for `PIC S9`.\n@param[in] sign_leading Non-zero for `SIGN IS LEADING`, 0 for trailing.\n@param[in] sign_separate Non-zero for `SEPARATE CHARACTER`, 0 overpunch.\n@param[in] use_ebcdic Non-zero for EBCDIC zones, 0 for ASCII.\n@param[out] out_buf Destination buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@param[out] out_written Receives bytes written.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "dec",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "int_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_signed",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sign_leading",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sign_separate",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "use_ebcdic",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_written",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_dec_from_zoned",
+      "doc": "@brief Unpacks a COBOL Zoned Decimal (`DISPLAY`) buffer into a decimal.\n@param[in] buf Source zoned-decimal bytes.\n@param[in] buf_len Length of `buf` in bytes.\n@param[in] frac_digits Implied fractional digits after `V`.\n@param[in] is_signed Non-zero for `PIC S9`.\n@param[in] sign_leading Non-zero for `SIGN IS LEADING`.\n@param[in] sign_separate Non-zero for `SEPARATE CHARACTER`.\n@param[in] use_ebcdic Non-zero for EBCDIC zones, 0 for ASCII.\n@param[out] out_dec Receives unpacked decimal value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "buf_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "frac_digits",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_signed",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sign_leading",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "sign_separate",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "use_ebcdic",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_dec",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_decimal",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_i64_to_comp",
+      "doc": "@brief Encodes a 64-bit integer into 2/4/8-byte COBOL `COMP`/`COMP-5`.\n@param[in] val Signed 64-bit integer.\n@param[in] byte_width Width in bytes (`2`, `4`, or `8`).\n@param[in] is_big_endian Non-zero for big-endian `COMP`, 0 for `COMP-5`.\n@param[out] out_buf Destination byte buffer.\n@param[in] buf_cap Capacity of `out_buf` in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "val",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "byte_width",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "buf_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_i64_from_comp",
+      "doc": "@brief Decodes a 2/4/8-byte COBOL `COMP`/`COMP-5` buffer into `int64`.\n@param[in] buf Source binary buffer.\n@param[in] byte_width Width in bytes (`2`, `4`, or `8`).\n@param[in] is_signed Non-zero for two's-complement signed.\n@param[in] is_big_endian Non-zero for big-endian `COMP`, 0 for `COMP-5`.\n@param[out] out_val Receives decoded 64-bit integer.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "byte_width",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_signed",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "is_big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_val",
+          "type": {
+            "kind": 8,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_ebcdic_to_utf8",
+      "doc": "@brief Transcodes mainframe EBCDIC bytes (`IBM037`/`1047`/`500`/`1140`) to\nspace-padded UTF-8 `PIC X`.\n@param[in] cp Source EBCDIC codepage.\n@param[in] in_bytes Source EBCDIC byte buffer.\n@param[in] in_len Length of `in_bytes` in bytes.\n@param[out] out_utf8 Destination space-padded UTF-8 buffer.\n@param[in] out_cap Capacity of `out_utf8` in bytes.\n@param[out] out_len Receives exact unpadded UTF-8 byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "in_bytes",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "in_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_utf8",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "out_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_utf8_to_ebcdic",
+      "doc": "@brief Transcodes UTF-8 text into mainframe EBCDIC bytes.\n@param[in] cp Target EBCDIC codepage.\n@param[in] in_utf8 Source UTF-8 text buffer.\n@param[in] in_len Length of `in_utf8` in bytes.\n@param[out] out_bytes Destination EBCDIC byte buffer.\n@param[in] out_cap Capacity of `out_bytes` in bytes.\n@param[out] out_len Receives encoded EBCDIC byte count.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "in_utf8",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "in_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_bytes",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "out_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_utf8_to_utf16",
+      "doc": "@brief Transcodes UTF-8 text to UTF-16 `GRAPHIC`/`NATIONAL` code units.\n@param[in] in_utf8 Source UTF-8 text buffer.\n@param[in] in_len Length of `in_utf8` in bytes.\n@param[in] big_endian Non-zero for big-endian `GRAPHIC`, 0 for host-endian.\n@param[out] out_u16 Destination UTF-16 code unit array.\n@param[in] out_cap Capacity of `out_u16` in 16-bit code units.\n@param[out] out_units Receives number of 16-bit code units written.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "in_utf8",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "in_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_u16",
+          "type": {
+            "kind": 5,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "out_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_units",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_utf16_to_utf8",
+      "doc": "@brief Transcodes UTF-16 `GRAPHIC`/`NATIONAL` code units into UTF-8 `PIC X`.\n@param[in] in_u16 Source UTF-16 code unit array.\n@param[in] in_units Number of 16-bit units in `in_u16`.\n@param[in] big_endian Non-zero if `in_u16` is big-endian.\n@param[out] out_utf8 Destination space-padded UTF-8 buffer.\n@param[in] out_cap Capacity of `out_utf8` in bytes.\n@param[out] out_len Receives exact unpadded UTF-8 byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "in_u16",
+          "type": {
+            "kind": 5,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "in_units",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_utf8",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "out_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_parse_str",
+      "doc": "@brief Parses a COBOL Copybook (`.cpy`) source string into a reusable handle.\n@param[in] src Copybook source text buffer.\n@param[in] src_len Length of `src` in bytes.\n@param[in] fmt Source layout format (`AUTO`, `FIXED`, `FREE`).\n@param[out] out_cpy Receives allocated Copybook handle.\n@return `COBOL_ORM_OK` on success, or error code on syntax/OOM failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "src",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "src_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "fmt",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_parse_file",
+      "doc": "@brief Parses a COBOL Copybook (`.cpy`) file from disk into a handle.\n@param[in] path File path buffer.\n@param[in] path_len Length of `path` buffer in bytes.\n@param[in] fmt Source layout format (`AUTO`, `FIXED`, `FREE`).\n@param[out] out_cpy Receives allocated Copybook handle.\n@return `COBOL_ORM_OK` on success, or error code on I/O/syntax failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "path",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "path_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "fmt",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_info",
+      "doc": "@brief Retrieves summary layout metadata for a parsed Copybook record.\n@param[in] cpy Parsed Copybook handle.\n@param[out] out_info Receives `cobol_orm_cpy_info_t`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_info",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy_info",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_field_info",
+      "doc": "@brief Retrieves metadata for a single field (0-based index) in a Copybook.\n@param[in] cpy Parsed Copybook handle.\n@param[in] field_idx 0-based elementary field index.\n@param[out] out_col Receives `cobol_orm_col_info_t`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "field_idx",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_col",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_col_info",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_set_pk",
+      "doc": "@brief Overrides the SQL primary key column name for Copybook-driven CRUD.\n@param[in] cpy Parsed Copybook handle.\n@param[in] col_name Primary key COBOL or SQL column name buffer.\n@param[in] name_len Length of `col_name` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "col_name",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "name_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_emit_ddl",
+      "doc": "@brief Emits dialect-specific `CREATE TABLE` DDL from a parsed Copybook.\n@param[in] cpy Parsed Copybook handle.\n@param[in] dialect Target SQL dialect.\n@param[out] out_sql Destination space-padded SQL buffer.\n@param[in] sql_cap Capacity of `out_sql` in bytes.\n@param[out] out_len Receives exact unpadded SQL byte length.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dialect",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_sql",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "sql_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_create_table",
+      "doc": "@brief Creates the SQL table corresponding to a parsed Copybook on `db`.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] dialect Target SQL dialect.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dialect",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_validate_88",
+      "doc": "@brief Validates all level-`88` domain conditions against a raw COBOL `01`\nrecord buffer.\n@param[in] cpy Parsed Copybook handle.\n@param[in] rec_buf Raw COBOL `01` record bytes.\n@param[in] rec_len Length of `rec_buf` in bytes.\n@param[in] cp Wire character codepage (`ASCII`/`UTF8`/`IBM037`/...).\n@param[in] big_endian Non-zero for mainframe big-endian `COMP`.\n@return `COBOL_ORM_OK` if all level-88 rules hold,\n`COBOL_ORM_ERROR_VALIDATION` if violated, or other error code.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_insert",
+      "doc": "@brief Inserts a raw COBOL `01` working-storage record directly into `db`.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] rec_buf Raw COBOL `01` record bytes.\n@param[in] rec_len Length of `rec_buf` in bytes.\n@param[in] cp Wire character codepage.\n@param[in] big_endian Non-zero for mainframe big-endian `COMP`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_update",
+      "doc": "@brief Updates an existing SQL row from a raw COBOL `01` record by its PK.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] rec_buf Raw COBOL `01` record bytes.\n@param[in] rec_len Length of `rec_buf` in bytes.\n@param[in] cp Wire character codepage.\n@param[in] big_endian Non-zero for mainframe big-endian `COMP`.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "rec_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_find_i32",
+      "doc": "@brief Finds a SQL row by 32-bit integer PK and hydrates it directly into a\nraw COBOL `01` record buffer.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] id_val 32-bit integer primary key value.\n@param[in] cp Target wire character codepage.\n@param[in] big_endian Non-zero for mainframe big-endian `COMP`.\n@param[out] out_rec_buf Destination COBOL `01` record buffer.\n@param[in] rec_cap Capacity of `out_rec_buf` in bytes.\n@return `COBOL_ORM_OK` on success, `COBOL_ORM_ERROR_NOT_FOUND` if missing, or\nother error code.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "id_val",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_rec_buf",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "rec_cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_delete_i32",
+      "doc": "@brief Deletes a SQL row by 32-bit integer PK for a Copybook table.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] id_val 32-bit integer primary key value.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "id_val",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_find_all",
+      "doc": "@brief Hydrates up to `max_rows` records into a contiguous COBOL `OCCURS`\nrecord table buffer.\n@param[in] db Active database connection handle.\n@param[in] cpy Parsed Copybook handle.\n@param[in] cp Target wire character codepage.\n@param[in] big_endian Non-zero for mainframe big-endian `COMP`.\n@param[out] out_rec_array Contiguous array of `max_rows * total_byte_size`\nbytes.\n@param[in] max_rows Maximum records that fit in `out_rec_array`.\n@param[out] out_row_count Receives number of records hydrated.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 1,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "cp",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "big_endian",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_rec_array",
+          "type": {
+            "kind": 3,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        },
+        {
+          "name": "max_rows",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_row_count",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_cpy_free",
+      "doc": "@brief Frees a parsed Copybook handle and associated metadata.\n@param[in] cpy Parsed Copybook handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "cpy",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_cpy",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_mig_init",
+      "doc": "@brief Creates a schema migration runner bound to `db` and a directory path.\n@param[in] db Active database connection handle.\n@param[in] dir_path Path to migration `.sql` directory.\n@param[in] dir_len Length of `dir_path` buffer in bytes.\n@param[out] out_mig Receives migration runner handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dir_path",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "dir_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_mig",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 2,
+            "ref_name": "cobol_orm_mig",
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_mig_up",
+      "doc": "@brief Applies all pending `UP` schema migrations (optionally as dry-run).\n@param[in] mig Migration runner handle.\n@param[in] dry_run Non-zero to simulate without executing SQL.\n@param[out] out_applied Receives total count of applied migrations.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "mig",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_mig",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dry_run",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_applied",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_mig_down",
+      "doc": "@brief Reverts the last `steps` applied migrations using `DOWN` scripts.\n@param[in] mig Migration runner handle.\n@param[in] steps Number of migrations to roll back (`0` rolls back all).\n@param[in] dry_run Non-zero to simulate without executing SQL.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "mig",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_mig",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "steps",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "dry_run",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_mig_free",
+      "doc": "@brief Frees a schema migration runner handle.\n@param[in] mig Migration runner handle.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "mig",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_mig",
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_odbc_sqlstate",
+      "doc": "@brief Retrieves the 5-character ODBC/Db2 `SQLSTATE` for `db`.\n@param[in] db Active ODBC or Db2 database handle.\n@param[out] out_state Destination buffer (at least 5 bytes).\n@param[in] cap Capacity of `out_state` in bytes.\n@param[out] out_len Receives exact length written (`5` when available).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_state",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "cap",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "out_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 2
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_db2_set_isolation",
+      "doc": "@brief Configures transaction isolation level on an IBM Db2 connection.\n@param[in] db Active Db2 database handle.\n@param[in] iso Target Db2 isolation level (`UR`, `CS`, `RS`, `RR`).\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "iso",
+          "type": {
+            "kind": 6,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "ref_name": null,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_db2_set_schema",
+      "doc": "@brief Executes `SET CURRENT SCHEMA` on an IBM Db2 connection.\n@param[in] db Active Db2 database handle.\n@param[in] schema Target schema name buffer.\n@param[in] schema_len Length of `schema` buffer in bytes.\n@return `COBOL_ORM_OK` on success, or error code on failure.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "db",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_db",
+            "array_size": 0
+          },
+          "intent": 1
+        },
+        {
+          "name": "schema",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        },
+        {
+          "name": "schema_len",
+          "type": {
+            "kind": 7,
+            "is_const": 0,
+            "pointer_depth": 0,
+            "array_size": 0
+          },
+          "intent": 1
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_commarea_dispatch",
+      "doc": "@brief Dispatches a single fixed-width `COMMAREA` ORM request using integer\nhandle slot IDs (`1..64`) for COBOL-60, COBOL-61, COBOL-61 Extended,\nCOBOL-65, COBOL-68, COBOL-74, and COBOL-85 callers without `USAGE POINTER`.\n@param[in,out] commarea Pointer to caller-owned `cobol_orm_commarea_t`.\n@return `COBOL_ORM_OK` on success, or the mirrored `commarea->status` error\ncode.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "commarea",
+          "type": {
+            "kind": 12,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "ref_name": "cobol_orm_commarea",
+            "array_size": 0
+          },
+          "intent": 3
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_display_dispatch",
+      "doc": "@brief Endian-independent pure `USAGE DISPLAY` (552-byte ASCII `PIC 9`/`X`)\nCOMMAREA dispatcher for COBOL-60, COBOL-61, COBOL-61 Extended, COBOL-65,\nCOBOL-68, COBOL-74, and COBOL-85 programs with zero binary-endian dependency.\nLayout: `[0..3] opcode`, `[4..7] status`, `[8..11] db_id`, `[12..15]\nstmt_id`,\n`[16..19] param_idx`, `[20..31] val_i32 (signed ASCII)`, `[32..35]\ndata1_len`,\n`[36..39] data2_len`, `[40..295] data1`, `[296..551] data2`.\n@param[in,out] display_buf Caller-owned 552-byte `USAGE DISPLAY` buffer.\n@return `COBOL_ORM_OK` on success, or mirrored status error code.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": [
+        {
+          "name": "display_buf",
+          "type": {
+            "kind": 0,
+            "is_const": 0,
+            "pointer_depth": 1,
+            "array_size": 0
+          },
+          "intent": 0
+        }
+      ]
+    },
+    {
+      "kind": 3,
+      "name": "cobol_orm_legacy_reset",
+      "doc": "@brief Resets the global legacy integer handle table and closes any open\nhandles (useful for clean shutdown and deterministic test isolation).\n@return `COBOL_ORM_OK` on success, or first error encountered during cleanup.",
+      "return_or_base_type": {
+        "kind": 6,
+        "is_const": 0,
+        "pointer_depth": 0,
+        "ref_name": null,
+        "array_size": 0
+      },
+      "fields": []
+    }
+  ]
+}

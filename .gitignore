@@ -1,0 +1,46 @@
+# Build directories
+build/
+build-*/
+cmake-build-*/
+out/
+
+# Compiled binaries and object files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.pdb
+*.ilk
+*.exp
+
+# Coverage artifacts
+*.gcda
+*.gcno
+*.gcov
+coverage/
+.coverage
+
+# Generated docs & IDE metadata
+docs/html/
+docs/latex/
+compile_commands.json
+.DS_Store
+.vscode/
+.idea/
+
+# Temporary test databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+/tmp/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo

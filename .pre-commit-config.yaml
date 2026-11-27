@@ -1,0 +1,79 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(generated|src/generated)/
+      - id: end-of-file-fixer
+        exclude: ^(generated|src/generated)/
+      - id: mixed-line-ending
+        exclude: ^(generated|src/generated)/
+
+  - repo: local
+    hooks:
+      - id: clang-format
+        name: clang-format (ISO C89)
+        entry: clang-format --dry-run --Werror
+        language: system
+        files: ^(include|src|tests/c)/.*\.(c|h)$
+        exclude: ^src/generated/
+
+      - id: cppcheck
+        name: cppcheck (strict C89)
+        entry: cppcheck --enable=warning,style,performance,portability --std=c89 --error-exitcode=1 --inline-suppr --suppress=missingIncludeSystem --suppress=unusedFunction -I include -I src -I ../c-orm/include include src/cobol_orm_str.c src/cobol_orm_db.c src/cobol_orm_pool.c src/cobol_orm_tx.c src/cobol_orm_stmt.c src/cobol_orm_abstract.c src/cobol_orm_query.c src/cobol_orm_decimal.c src/cobol_orm_ebcdic.c src/cobol_orm_copybook.c src/cobol_orm_migrations.c src/cobol_orm_enterprise.c src/cobol_orm_legacy.c
+        language: system
+        pass_filenames: false
+
+      - id: check-enum-returns
+        name: Check C89 Enum Returns (libclang)
+        entry: python3 scripts/check_enum_returns_clang.py include src -p build
+        language: system
+        pass_filenames: false
+
+      - id: check-no-discard-void
+        name: Check No-Discard (void) Casts (libclang)
+        entry: python3 scripts/check_no_discard_void_clang.py include src -p build
+        language: system
+        pass_filenames: false
+
+      - id: check-c-and-cobol-docs
+        name: Check 100% C89 (incl. src/generated) & COBOL Doc Coverage
+        entry: python3 scripts/generate_undercovered.py --doc
+        language: system
+        pass_filenames: false
+
+      - id: check-fixed80-margins
+        name: Check Strict Fixed-80 COBOL Margins
+        entry: python3 scripts/free_to_fixed80.py --verify generated/fixed copybooks/fixed cobol/fixed copybooks/era cobol/era/cobol60 cobol/era/cobol61 cobol/era/cobol61x cobol/era/cobol65 cobol/era/cobol68 cobol/era/cobol74 cobol/era/cobol85 cobol/era/cobol2002 tests/cobol/test_e2e_fixed.cbl examples/fixed
+        language: system
+        pass_filenames: false
+
+      - id: check-cobol-coverage
+        name: Check Real 100% COBOL Wrapper (fn/line/branch) & 10-Era Coverage
+        entry: python3 scripts/check_cobol_coverage.py --build-dir build
+        language: system
+        pass_filenames: false
+
+      - id: check-cdd-bindings-drift
+        name: Check cdd-c COBOL Bindings Drift
+        entry: ./scripts/generate_bindings.sh --check
+        language: system
+        pass_filenames: false
+
+      - id: cobc-syntax-free
+        name: GnuCOBOL Free-Format Strict Syntax Check (lib, generated, tests, examples)
+        entry: bash -c "cobc -fsyntax-only -free -Wall -Wextra -Werror -I copybooks/free -I generated/free cobol/free/cobol_orm_lib.cbl tests/cobol/test_e2e_free.cbl examples/free/*.cbl && cobc -fsyntax-only -free -Wall -Wextra -Werror -I generated/free generated/free/cobol_orm.cbl"
+        language: system
+        pass_filenames: false
+
+      - id: cobc-syntax-fixed
+        name: GnuCOBOL Fixed-80, IBM-Strict & MF-Strict Syntax Check
+        entry: bash -c "cobc -fsyntax-only -fixed -Wall -Wextra -Werror -I copybooks/fixed -I generated/fixed cobol/fixed/cobol_orm_lib.cbl tests/cobol/test_e2e_fixed.cbl examples/fixed/quickstart_crud.cbl examples/fixed/banking_ledger.cbl examples/fixed/query_builder_demo.cbl && cobc -fsyntax-only -fixed -Wall -Wextra -Werror -I generated/fixed generated/fixed/cobol_orm.cbl && cobc -fsyntax-only -fixed -std=ibm-strict -Wall -Wextra -Werror -I copybooks/fixed cobol/fixed/cobol_orm_lib.cbl tests/cobol/test_e2e_fixed.cbl examples/fixed/migrations_and_pool.cbl && cobc -fsyntax-only -fixed -std=mf-strict -Wall -Wextra -Werror -I copybooks/fixed cobol/fixed/cobol_orm_lib.cbl tests/cobol/test_e2e_fixed.cbl examples/fixed/quickstart_crud.cbl examples/fixed/banking_ledger.cbl examples/fixed/query_builder_demo.cbl"
+        language: system
+        pass_filenames: false
+
+      - id: cmake-build-and-test
+        name: CMake Build & Full C89 + 10-Era COBOL + Examples CTest Suite
+        entry: bash -c "cmake --build build --parallel 4 && ctest --test-dir build --output-on-failure"
+        language: system
+        pass_filenames: false
