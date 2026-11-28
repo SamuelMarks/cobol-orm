@@ -3,9 +3,10 @@
 [![C89 Strict](https://img.shields.io/badge/C-ISO%20C89%20pedantic%20-blue)](#quality-gates)
 [![COBOL Standards](https://img.shields.io/badge/COBOL-60%20..%202023%20(10%2F10)-brightgreen)](#multi-era-cobol-compatibility-matrix)
 [![Doc Coverage](https://img.shields.io/badge/doc%20coverage-100%25-brightgreen)](#quality-gates)
-[![Line Coverage](https://img.shields.io/badge/line%20coverage-100%25%20(2327%2F2327)-brightgreen)](#quality-gates)
-[![Branch Coverage](https://img.shields.io/badge/branch%20coverage-100%25%20(1036%2F1036)-brightgreen)](#quality-gates)
+[![Line Coverage](https://img.shields.io/badge/line%20coverage-100%25%20(2330%2F2330)-brightgreen)](#quality-gates)
+[![Branch Coverage](https://img.shields.io/badge/branch%20coverage-100%25%20(1039%2F1039)-brightgreen)](#quality-gates)
 [![Function Coverage](https://img.shields.io/badge/function%20coverage-100%25%20(150%2F150)-brightgreen)](#quality-gates)
+[![cobol-orm CI](https://github.com/SamuelMarks/cobol-orm/actions/workflows/ci.yml/badge.svg)](https://github.com/SamuelMarks/cobol-orm/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue)](#license)
 
 **`cobol-orm`** is a production-grade, strongly-typed COBOL ORM and database FFI library exposing [`c-orm`](../c-orm) to **all 10 historical and modern COBOL standards** (`COBOL-60` through `COBOL-2023`), reproducibly generated with [`cdd-c`](../cdd-c) (`cdd-c bind -l cobol`) and backed by an ISO C89 FFI facade, dual **free-format** and **strict fixed 80-column** COBOL libraries, and an endian-independent `USAGE DISPLAY` `COMMAREA` bridge for legacy dialects.
@@ -42,7 +43,7 @@
   - EBCDIC transcoding (`IBM037`, `IBM1047`, `IBM500`, `IBM1140` with Euro `U+20AC`) and UTF-16 `GRAPHIC`/`NATIONAL` (big-endian and host-endian) with strict surrogate validation.
 - **Full Relational Stack**: Built-in linked SQLite + `memory://`, dynamic PostgreSQL/MySQL, Generic ODBC 3.52, and IBM Db2 CLI (`SQLSTATE`, isolation levels `UR`/`CS`/`RS`/`RR`, `SET CURRENT SCHEMA`), thread-safe connection pooling with telemetry, nested savepoints, prepared-statement LRU cache, dynamic abstract result sets, arena-backed multi-dialect SQL AST query builder, and versioned `UP`/`DOWN` SQL migrations.
 - **Zero-Compromise Engineering**:
-  - **100.0% test coverage** (function `150/150`, line `2327/2327`, branch `1036/1036`) across all C89 sources and generated shims via `gcovr`, plus **100.0% real execution coverage** (functions `42/42`, lines `114/114`, branches `12/12`) across both free and fixed COBOL wrapper libraries via `cobc -C -fsource-location` + `gcov -b`.
+  - **100.0% test coverage** (function `150/150`, line `2330/2330`, branch `1039/1039`) across all C89 sources and generated shims via `gcovr`, plus **100.0% real execution coverage** (functions `42/42`, lines `114/114`, branches `12/12`) across both free and fixed COBOL wrapper libraries via `cobc -C -fsource-location` + `gcov -b`.
   - **100.0% doc coverage** across every C89 file/struct/enum/function/param/macro (including `src/generated/`, `Doxygen WARN_AS_ERROR=YES`) and every COBOL `.cpy`/`.cbl` file/class/field/level-88/`PROGRAM-ID`/`USING` parameter.
   - **Strong typing & universal error-enum percolation**: 7 distinct magic-tagged opaque handle structs, every C function returns `cobol_orm_error_t` with `COBOL_ORM_NO_DISCARD`, zero `(void)` return discards, zero `-Wno-*` warning suppressions, ASan + UBSan clean, and deterministic OOM fault injection.
 
@@ -221,7 +222,7 @@ All modern examples exist in **both** free-format (`examples/free/`) and strict 
 | Gate | Command | Requirement |
 | :--- | :--- | :--- |
 | Full CTest Suite (34 tests) | `ctest --test-dir build --output-on-failure` | 34/34 passing (C89, ABI, 10 eras, E2E, IBM/MF strict, 17 examples) |
-| C89 Coverage (100%) | `gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov` | 100.0% fn (`150/150`), 100.0% line (`2327/2327`), 100.0% branch (`1036/1036`) |
+| C89 Coverage (100%) | `gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov` | 100.0% fn (`150/150`), 100.0% line (`2330/2330`), 100.0% branch (`1039/1039`) |
 | COBOL Coverage (100%) | `python3 scripts/check_cobol_coverage.py --build-dir build` | 100.0% fn (`42/42`), 100.0% line (`114/114`), 100.0% branch (`12/12`), 10/10 eras |
 | Documentation Coverage (100%) | `python3 scripts/generate_undercovered.py --doc` | Zero Doxygen warnings (incl. `src/generated/`) + zero COBOL doc gaps |
 | Strong Typing & Linters | `pre-commit run --all-files` | `clang-format`, `cppcheck`, `libclang` enum-return & no-discard checks, fixed-80 margins, binding drift, `cobc` strict syntax |

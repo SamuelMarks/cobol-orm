@@ -57,9 +57,9 @@ jobs:
           cmake --build build-cov --parallel 4 --target test_cobol_orm_c
           ctest --test-dir build-cov -R c89_unit_and_oom_suite --output-on-failure
           if [ "${{ runner.os }}" = "macOS" ]; then
-            gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
+            gcovr --gcov-executable "xcrun llvm-cov gcov" -r . --filter 'src/.*\.c' --txt-metric branch --print-summary --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
           else
-            gcovr -r . --filter 'src/.*\.c' --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
+            gcovr -r . --filter 'src/.*\.c' --txt-metric branch --print-summary --fail-under-line 100 --fail-under-branch 100 --fail-under-function 100 build-cov
           fi
           python3 scripts/check_cobol_coverage.py --build-dir build
 

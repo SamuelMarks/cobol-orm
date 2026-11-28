@@ -912,11 +912,17 @@ TEST test_copybook_crud(void) {
             cobol_orm_cpy_field_info(cpy, 0, NULL));
   ASSERT_EQ(COBOL_ORM_ERROR_NOT_FOUND, cobol_orm_cpy_field_info(cpy, 99, &col));
   ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_field_info(cpy, 0, &col));
+  ASSERT_EQ(1u, col.is_signed);
   ASSERT_EQ(1u, col.is_pk);
+  ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_field_info(cpy, 1, &col));
+  ASSERT_EQ(0u, col.is_signed);
+  ASSERT_EQ(0u, col.is_pk);
 
   ASSERT_EQ(COBOL_ORM_ERROR_INVALID_HANDLE, cobol_orm_cpy_set_pk(NULL, "X", 1));
   ASSERT_EQ(COBOL_ORM_ERROR_NULL_POINTER, cobol_orm_cpy_set_pk(cpy, NULL, 1));
   ASSERT_EQ(COBOL_ORM_ERROR_NOT_FOUND, cobol_orm_cpy_set_pk(cpy, "NOPE", 4));
+  ASSERT_EQ(COBOL_ORM_ERROR_NOT_FOUND,
+            cobol_orm_cpy_set_pk(cpy, "ACCT-ID-EXTRA", 13));
   ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_set_pk(cpy, "ACCT-ID", 7));
   ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_set_pk(cpy, "acct_id", 7));
 
@@ -2424,10 +2430,12 @@ TEST test_branch_and_mock_vtable_coverage(void) {
       ((c_orm_cobol_field_t *)(size_t)dcpy->elem_fields[4])->num_conditions =
           orig_nc;
 
-      /* Test string range lower-bound failure ('A' < 'B') in validate_88 */
+      /* Test string range lower-bound failure ('A' < 'B') and multi-value 88
+       * short-circuit ('C' matches first entry of VALUE 'B' THRU 'D' 'Z') in
+       * validate_88 */
       {
         static const char k_sr[] =
-            "01 SR-REC. 05 SR-CH PIC X(1). 88 SR-AC VALUE 'B' THRU 'D'.";
+            "01 SR-REC. 05 SR-CH PIC X(1). 88 SR-AC VALUE 'B' THRU 'D' 'Z'.";
         cobol_orm_cpy_t *srcpy = NULL;
         cobol_orm_u8_t ch = (cobol_orm_u8_t)'A';
         ASSERT_EQ(COBOL_ORM_OK,
@@ -2436,6 +2444,9 @@ TEST test_branch_and_mock_vtable_coverage(void) {
         ASSERT_EQ(
             COBOL_ORM_ERROR_VALIDATION,
             cobol_orm_cpy_validate_88(srcpy, &ch, 1, COBOL_ORM_CP_ASCII, 0));
+        ch = (cobol_orm_u8_t)'C';
+        ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_validate_88(
+                                    srcpy, &ch, 1, COBOL_ORM_CP_ASCII, 0));
         ASSERT_EQ(COBOL_ORM_OK, cobol_orm_cpy_free(srcpy));
       }
 

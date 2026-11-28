@@ -21,8 +21,15 @@ from generate_undercovered import (
 )
 
 
-def update_readme_text(readme_text, c_cov, doc_ok):
-    """Return updated README.md content with live coverage & doc badge counts."""
+def update_readme_text(readme_text, c_cov, cob_cov, doc_ok):
+    """Return updated README.md content with live coverage & doc badge counts.
+
+    @param[in] readme_text Existing README.md markdown content.
+    @param[in] c_cov Dictionary of C89 gcovr summary metrics.
+    @param[in] cob_cov Dictionary of COBOL execution coverage metrics.
+    @param[in] doc_ok True when C89 and COBOL documentation coverage is 100%.
+    @return Updated README.md markdown content.
+    """
     line_pct = int(round(c_cov["line_percent"]))
     br_pct = int(round(c_cov["branch_percent"]))
     fn_pct = int(round(c_cov["function_percent"]))
@@ -31,6 +38,10 @@ def update_readme_text(readme_text, c_cov, doc_ok):
     lc, lt = c_cov["line_covered"], c_cov["line_total"]
     bc, bt = c_cov["branch_covered"], c_cov["branch_total"]
     fc, ft = c_cov["function_covered"], c_cov["function_total"]
+    cfn_h, cfn_t = cob_cov["fn_hit"], cob_cov["fn_total"]
+    cln_h, cln_t = cob_cov["line_hit"], cob_cov["line_total"]
+    cbr_h, cbr_t = cob_cov["br_hit"], cob_cov["br_total"]
+    cera_h, cera_t = cob_cov["era_hit"], cob_cov["era_total"]
 
     updated = re.sub(
         r"\[!\[Doc Coverage\]\([^\n]+\)\]",
@@ -53,15 +64,33 @@ def update_readme_text(readme_text, c_cov, doc_ok):
         updated,
     )
     updated = re.sub(
-        r"\*\*100\.0% test coverage\*\* \(function, line `\d+/\d+`, branch `\d+/\d+`\)",
+        r"\*\*100\.0% test coverage\*\* \(function(?:\s+`\d+/\d+`)?, line `\d+/\d+`, branch `\d+/\d+`\)",
         f"**100.0% test coverage** (function `{fc}/{ft}`, line `{lc}/{lt}`, branch `{bc}/{bt}`)",
+        updated,
+    )
+    updated = re.sub(
+        r"\*\*100\.0% real execution coverage\*\* \(functions `\d+/\d+`, lines `\d+/\d+`, branches `\d+/\d+`\)",
+        f"**100.0% real execution coverage** (functions `{cfn_h}/{cfn_t}`, lines `{cln_h}/{cln_t}`, branches `{cbr_h}/{cbr_t}`)",
+        updated,
+    )
+    updated = re.sub(
+        r"(\| C89 Coverage \(100%\) \| [^\n]+\| )100\.0% fn \(`\d+/\d+`\), 100\.0% line \(`\d+/\d+`\), 100\.0% branch \(`\d+/\d+`\)",
+        rf"\g<1>100.0% fn (`{fc}/{ft}`), 100.0% line (`{lc}/{lt}`), 100.0% branch (`{bc}/{bt}`)",
+        updated,
+    )
+    updated = re.sub(
+        r"(\| COBOL Coverage \(100%\) \| [^\n]+\| )100\.0% fn \(`\d+/\d+`\), 100\.0% line \(`\d+/\d+`\), 100\.0% branch \(`\d+/\d+`\), \d+/\d+ eras",
+        rf"\g<1>100.0% fn (`{cfn_h}/{cfn_t}`), 100.0% line (`{cln_h}/{cln_t}`), 100.0% branch (`{cbr_h}/{cbr_t}`), {cera_h}/{cera_t} eras",
         updated,
     )
     return updated
 
 
 def main():
-    """CLI entry point for updating or verifying README.md coverage shields."""
+    """CLI entry point for updating or verifying README.md coverage shields.
+
+    @return Exit status code (`0` on success, `1` on drift or doc gap).
+    """
     parser = argparse.ArgumentParser(
         description="Update or verify README.md coverage & doc badges."
     )
@@ -86,11 +115,11 @@ def main():
         return 1
 
     c_cov = collect_c_coverage(root, root / args.cov_dir)
-    _ = collect_cobol_coverage(root, root / args.build_dir)
+    cob_cov = collect_cobol_coverage(root, root / args.build_dir)
 
     readme_path = root / "README.md"
     old_text = readme_path.read_text(encoding="utf-8")
-    new_text = update_readme_text(old_text, c_cov, c_ok and cob_ok)
+    new_text = update_readme_text(old_text, c_cov, cob_cov, c_ok and cob_ok)
 
     if args.check:
         if old_text != new_text:
